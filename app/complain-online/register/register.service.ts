@@ -24,4 +24,7 @@ export class RegisterService {
     }
     return this.http.post(`${this.url}/login`, user, {'responseType': 'text'})
   }
+  activation(token: string) {
+    return this.http.post(`${this.url}/activation`, token, {'responseType': 'text'})
+  }
 }

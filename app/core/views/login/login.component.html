@@ -56,8 +56,13 @@
                 </div>
               </div>
               <br>
-              <div class="col-12">
-                <button type="button" class="btn btn-primary px-4" (click)="openModal(template)">Create an Account</button>
+              <div class="row">
+                <div class="col">
+                  <button type="button" class="btn btn-primary" (click)="openModal(template)">Create an Account</button>
+                </div>
+                <div class="col">
+                  <button style="float: right;" type="button" class="btn btn-primary" (click)="openModal(verif)">Verify an Account</button>
+                </div>
               </div>
             </form>
           </div>
@@ -68,4 +73,42 @@
 </div>
 <ng-template #template>
   <app-register></app-register>
+</ng-template>
+
+<ng-template #verif>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Verification</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>Insert Your Token Below</h5>
+    <form [formGroup]="registerForm" (ngSubmit)='onSubmit()' >
+      <div class="input-group mb-3">
+        <input
+          formControlName="token"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'token')"
+          class="form-control"
+          type="text"
+          required
+        >
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'token')">
+          <div
+          *ngIf="registerForm.get('token').hasError('required')"
+          class="invalid-feedback"
+        >
+          Token is required.
+        </div>
+        </ng-container>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-block btn-primary px-4" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
 </ng-template>
