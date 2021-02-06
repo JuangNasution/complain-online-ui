@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
 import { RegisterComponent } from '../../../complain-online/register/form/register.component';
@@ -77,6 +76,7 @@ export class LoginComponent implements OnInit {
     if (!loginForm.form.valid) {
       return;
     }
+
     this.authService.login(this.userLogin.username, this.userLogin.password)
     .subscribe(
       _ => this.router.navigateByUrl('/dashboard'),
@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+
     // this.registerService.loginTemp(this.userLogin.username, this.userLogin.password)
     //   .subscribe(
     //     res => {

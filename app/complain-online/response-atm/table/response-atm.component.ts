@@ -35,7 +35,7 @@ export class ResponseAtmComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.registerForm = this.formBuilder.group({
-      responseComplain: new FormControl(null, Validators.required)
+      complainResponse: new FormControl(null, Validators.required),
     });
   }
 
@@ -61,20 +61,19 @@ export class ResponseAtmComponent implements OnInit {
   onSubmit() {
 
     this.registerForm.markAllAsTouched();
-    console.log(normalizeFlag(this.registerForm.get('responseComplain')));
     if (!this.registerForm.valid) {
       return;
     }
 
-    // this.responseatmservice.responseComplain(this.dataDetail.noComplain, normalizeFlag(this.registerForm.get('responseComplain')))
-    // .subscribe(
-    //   res => {
-    //     if (res) {
-    //       Swal.fire('Success!', 'Your Response has been Recorded', 'success').then(function () {
-    //         location.reload();
-    //     });
-    //     }
-    //   })
+    this.responseatmservice.responseComplain(this.dataDetail.noComplain, normalizeFlag(this.registerForm))
+    .subscribe(
+      res => {
+        if (res) {
+          Swal.fire('Success!', 'Your Response has been Recorded', 'success').then(function () {
+            location.reload();
+        });
+        }
+      })
   }
   openModal(data: ComplainList, template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

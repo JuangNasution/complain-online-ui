@@ -232,15 +232,15 @@
     <form [formGroup]="registerForm" (ngSubmit)='onSubmit()'>
       <div class="input-group mb-3">
         <textarea
-          formControlName="responseComplain"
-          [class.is-invalid]="isFieldInvalid(registerForm, 'responseComplain')"
+          formControlName="complainResponse"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'complainResponse')"
           class="form-control"
           type="text"
           required
         ></textarea>
-        <ng-container *ngIf="isFieldInvalid(registerForm, 'responseComplain')">
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'complainResponse')">
           <div
-          *ngIf="registerForm.get('responseComplain').hasError('required')"
+          *ngIf="registerForm.get('complainResponse').hasError('required')"
           class="invalid-feedback"
         >
           Response is required.

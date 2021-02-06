@@ -25,9 +25,10 @@ export class ResponseAtmService extends BaseCrudTableService<ComplainList>{
       }
     );
   }
-  responseComplain(id: String, response: string) {
+  responseComplain(id: String, data: any) {
+
     return this.http.put<ComplainList>(
-      `${constant.complainOnlineUrl}/complain/${id}`, response);
+      `${constant.complainOnlineUrl}/complain/${id}`, data);
   }
   downloadMonitoring(data: FormGroup): Observable<HttpResponse<Blob>> {
     let httpParam = new HttpParams();

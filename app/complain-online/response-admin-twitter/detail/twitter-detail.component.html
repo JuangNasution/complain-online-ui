@@ -1,0 +1,63 @@
+<div class="row px-4">
+  <!-- First Name -->
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> User Twitter </strong>
+    <br />
+      {{ complainTwitter?.user }}
+    <ng-template #falseFirstName>-</ng-template>
+  </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Created Date </strong>
+    <br />
+      {{ complainTwitter?.createdAt | date:'medium' }}
+    <ng-template #falseAkaFirstName>-</ng-template>
+  </div>
+
+
+
+  <!-- Place Of Birth -->
+  <!-- <div class="col-sm-6 mt-2 pl-0">
+    <strong> status </strong>
+    <br />
+    <ng-template [ngIfElse]="falsestatus" [ngIf]="complainTwitter?.status==='1'">
+      <span class="badge badge-success">Done</span>
+    </ng-template>
+    <ng-template #falsestatus>
+      <span class="badge badge-danger">on Progress</span>
+    </ng-template>
+  </div> -->
+
+  <!-- Date Of Birth -->
+  <!-- <div class="col-sm-6 mt-2 pl-0">
+    <strong> Card Number </strong>
+    <br />
+      {{ complainTwitter?.cardNumber }}
+  </div> -->
+</div>
+
+<div class="row mt-2 mb-2">
+  <div class="col-12 mt-2">
+    <span
+      (click)="isDetail = !isDetail"
+      [attr.aria-expanded]="!isDetail"
+      style="cursor: pointer"
+      aria-controls="address-info-content"
+    >
+      <i class="fa fa-chevron-{{ isDetail ? 'right' : 'down' }}"></i>
+    </span>
+    <label
+      class="ml-2"
+      style="cursor: pointer"
+      (click)="isDetail = !isDetail"
+    >
+      <strong>Complain Detail</strong>
+    </label>
+  </div>
+</div>
+
+<div class="row border-top" [collapse]="isDetail">
+  <div class="col-12">
+    {{ complainTwitter?.text }}
+  </div>
+</div>
