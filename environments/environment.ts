@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
   // apiUrl: 'http://localhost:8080/ets-api',
-  // apiUrl: 'http://192.168.231.6:8080/ccms-api',
-  apiUrl: 'http://localhost:8080/ccms-api',
+  apiUrl: 'http://192.168.231.6:8080/ccms-api',
+  // apiUrl: 'http://localhost:8080/ccms-api',
 
   // apiUrl: 'http://10.70.10.215:8080/ets-api',
   basicUsername: 'core_client',

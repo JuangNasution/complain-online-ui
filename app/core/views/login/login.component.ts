@@ -78,29 +78,41 @@ export class LoginComponent implements OnInit {
     if (!loginForm.form.valid) {
       return;
     }
-    this.registerService.loginTemp(this.userLogin.username, this.userLogin.password)
-      .subscribe(
-        res => {
-          if (res == 'email not found') {
-            Swal.fire('Failed!', res, 'error')
-          }else if (res == 'wrong password') {
-            Swal.fire('Failed!', res , 'error')
-          } else if (res == 'account not activated yet') {
-            Swal.fire('Failed!', res , 'error')
-          } else {
-            this.authService.login(this.userLogin.username, this.userLogin.password)
-            .subscribe(
-              _ => this.router.navigateByUrl('/dashboard'),
-              (error: HttpErrorResponse) => {
-                let errorResponse = error as HttpErrorResponse;
-                if (errorResponse.status === 401 || errorResponse.status === 400) {
-                  this.wrongPassword = true;
-                }
-              }
-            );
-          }
+
+    this.authService.login(this.userLogin.username, this.userLogin.password)
+    .subscribe(
+      _ => this.router.navigateByUrl('/dashboard'),
+      (error: HttpErrorResponse) => {
+        let errorResponse = error as HttpErrorResponse;
+        if (errorResponse.status === 401 || errorResponse.status === 400) {
+          this.wrongPassword = true;
+        }
       }
-    )
+    );
+
+    // this.registerService.loginTemp(this.userLogin.username, this.userLogin.password)
+    //   .subscribe(
+    //     res => {
+    //       if (res == 'email not found') {
+    //         Swal.fire('Failed!', res, 'error')
+    //       }else if (res == 'wrong password') {
+    //         Swal.fire('Failed!', res , 'error')
+    //       } else if (res == 'account not activated yet') {
+    //         Swal.fire('Failed!', res , 'error')
+    //       } else {
+    //         this.authService.login(this.userLogin.username, this.userLogin.password)
+    //         .subscribe(
+    //           _ => this.router.navigateByUrl('/dashboard'),
+    //           (error: HttpErrorResponse) => {
+    //             let errorResponse = error as HttpErrorResponse;
+    //             if (errorResponse.status === 401 || errorResponse.status === 400) {
+    //               this.wrongPassword = true;
+    //             }
+    //           }
+    //         );
+    //       }
+    //   }
+    // )
   }
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {

@@ -1,0 +1,48 @@
+<div class="animated fadeIn">
+  <div class="row card-group">
+    <div class="col-xl-6" *ngFor="let twit of data">
+      <div class="card" (click)="onSubmit(twit, detailTwitter)">
+        <div class="row">
+          <div class="col-xl-4">
+            <img src={{twit.image}} class="card-img-top" alt={{twit.user}}>
+          </div>
+          <div class="col-xl-8">
+            <div class="card-body">
+              <h5 class="card-title">{{twit.user}}</h5>
+              <p class="">{{twit.text}}</p>
+              <p class="pull-left">{{twit.createdAt | date:'medium'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #detailTwitter>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Complain Detail</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <twitter-detail [dataDetail]="dataDetail"></twitter-detail>
+  </div>
+  <hr>
+  <div class="col-xl-4 offset-md-8">
+    <button
+    class="btn btn-sm btn-primary"
+    style="height:33.767px;width: 100%;"
+    (click)="onSendTwit(dataDetail)"
+    >
+      <i class="fa fa-check"></i> Send to PIC
+    </button>&nbsp;
+  </div>
+</ng-template>
+

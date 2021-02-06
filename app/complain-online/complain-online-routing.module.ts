@@ -28,7 +28,12 @@ const routes: Routes = [
       {
         path: "response-atm",
         loadChildren: () => import('./response-atm/response-atm.module').then(mod => mod.ResponseAtmModule)
+      },
+      {
+        path: "twitter",
+        loadChildren: () => import('./response-admin-twitter/response-admin.module').then(mod => mod.ResponseAtmModule)
       }
+
     ]
   }
 ];
