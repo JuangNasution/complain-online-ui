@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path: "response-atm",
         loadChildren: () => import('./response-atm/response-atm.module').then(mod => mod.ResponseAtmModule)
+      },
+      {
+        path: "export-atm",
+        loadChildren: () => import('./export-atm/export.module').then(mod => mod.ExportModule)
       }
     ]
   }

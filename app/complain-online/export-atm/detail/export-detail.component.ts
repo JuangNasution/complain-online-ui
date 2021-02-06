@@ -4,10 +4,10 @@ import { ComplainList } from '../../model';
 import { ComplainService } from '../../service';
 
 @Component({
-  selector: 'complain-detail',
-  templateUrl: 'complain-detail.component.html'
+  selector: 'export-detail',
+  templateUrl: 'export-detail.component.html'
 })
-export class ComplainDetailComponent implements OnInit {
+export class ExporttDetailComponent implements OnInit {
   complainList: ComplainList;
   @Input() dataDetail: ComplainList;
   isDetail: boolean = true;

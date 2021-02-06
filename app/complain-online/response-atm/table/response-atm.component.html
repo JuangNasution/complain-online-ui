@@ -186,6 +186,7 @@
                 </button> &nbsp;
                 <button
                   class="btn btn-sm btn-success"
+                  (click)="openModal(row, response)"
                   data-placement="bottom"
                   type="button"
                   title="edit"
@@ -216,5 +217,43 @@
   </div>
   <div class="modal-body mb-5">
     <atm-detail [dataDetail]="dataDetail"></atm-detail>
+  </div>
+</ng-template>
+
+<ng-template #response>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Response Complain</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>Insert Response Below</h5>
+    <form [formGroup]="registerForm" (ngSubmit)='onSubmit()'>
+      <div class="input-group mb-3">
+        <textarea
+          formControlName="responseComplain"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'responseComplain')"
+          class="form-control"
+          type="text"
+          required
+        ></textarea>
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'responseComplain')">
+          <div
+          *ngIf="registerForm.get('responseComplain').hasError('required')"
+          class="invalid-feedback"
+        >
+          Response is required.
+        </div>
+        </ng-container>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-block btn-primary px-4" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+
   </div>
 </ng-template>

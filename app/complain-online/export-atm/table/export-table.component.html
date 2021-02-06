@@ -1,0 +1,85 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header-blue">
+      <div class="clearfix">
+        <span class="float-left font-weight-bold mt-2">
+          Monitoring Table
+        </span>
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row mx-5">
+          <div class="col-sm-5 col-12">
+            <fieldset class="form-group">
+              <label class="col-form-label required" for="from-date">
+                From
+              </label>
+              <div class="input-group">
+                <span class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                </span>
+                <input
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                  class="form-control"
+                  formControlName="fromDate"
+                  bsDatepicker
+                  [maxDate]="maxDate"
+                />
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-sm-5 col-12">
+            <fieldset class="form-group">
+              <label class="col-form-label required" for="end-date">
+                To
+              </label>
+              <div class="input-group">
+                <span class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                </span>
+                <input
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                  class="form-control"
+                  formControlName="toDate"
+                  bsDatepicker
+                  [maxDate]="maxDate"
+                />
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-sm-2 col-12 d-flex align-items-end">
+            <fieldset class="form-group">
+              <button class="btn btn-primary">
+                <i class="fa fa-search"></i> &nbsp; Search
+              </button>
+            </fieldset>
+          </div>
+        </div>
+        <div class="col-12 mx-5" *ngIf="isFailed">
+          <div class="text-danger">
+            Cann't process, to date must be hight.
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-body">
+      <export-complain-detail
+        [form]="form"
+        (historyDetail)="getHistoryDetail($event)"
+        (downloadAction)="downloadMonitoring($event)"
+      >
+      </export-complain-detail>
+    </div>
+  </div>
+</div>
+
