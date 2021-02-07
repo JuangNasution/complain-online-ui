@@ -33,6 +33,7 @@ export class ExportTableComponent implements OnInit {
   dataDetail: ComplainList;
   complainList: ComplainList;
   category: string;
+  isTable: boolean[] = [false, false, false];
   @ViewChild(ExportDetailComponent, { static: false })
   exportDetailComponent: ExportDetailComponent;
 
@@ -47,10 +48,20 @@ export class ExportTableComponent implements OnInit {
       })
      }
   ngOnInit() {
+    this.isTable[0] = true;
     if (this.router.url == '/complain-online/export-atm') {
       this.category = 'ATM';
     } else {
       this.category = "e-Channel";
+    }
+  }
+  tabClickOnChange(tabMenu: number) {
+    for (let i = 0; i <= this.isTable.length - 1; i++) {
+      if (i == tabMenu) {
+        this.isTable[i] = true;
+      } else {
+        this.isTable[i] = false;
+      }
     }
   }
   getHistoryDetail(id: string) {

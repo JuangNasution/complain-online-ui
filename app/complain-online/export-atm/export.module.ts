@@ -6,12 +6,16 @@ import { ExportDetailComponent } from './search/export-search.component';
 import { ExportTableRoutingModule } from './export-routing.module';
 import { ExportTableComponent } from "./table/export-table.component";
 import { ExporttDetailComponent } from './detail/export-detail.component';
+import { TwitterTableComponent } from '../export-atm/twitter-table/twitter-table.component';
+import { TwitterDetailResponseComponent } from '../export-atm/twitter-detail/twitter-detail.component';
 
 @NgModule({
   declarations: [
     ExportTableComponent,
     ExportDetailComponent,
-    ExporttDetailComponent
+    ExporttDetailComponent,
+    TwitterTableComponent,
+    TwitterDetailResponseComponent
   ],
   imports: [
     CommonModule,

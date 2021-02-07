@@ -7,7 +7,8 @@ import { PagedApiResponse, PageRequest } from "../../lib/model";
 import { BaseCrudTableService } from "../../lib/service";
 import { ComplainModule } from "../complain-online.module";
 import { dateFormat } from "../export-atm/table/export-table.component";
-import { ComplainList } from "../model";
+import { ComplainList, ComplainTwitter } from "../model";
+import { ComplainTwitterList } from "../model/complain-list-twitter.model";
 
 @Injectable({providedIn: ComplainModule})
 export class ResponseAtmService extends BaseCrudTableService<ComplainList>{
@@ -25,11 +26,26 @@ export class ResponseAtmService extends BaseCrudTableService<ComplainList>{
       }
     );
   }
+  getTableRowTwt(param: HttpParams): Observable<PagedApiResponse<ComplainTwitterList>> {
+
+    return this.http.get<PagedApiResponse<ComplainTwitterList>>(
+      `${constant.complainOnlineUrl}/complain/response-twitter`,
+      {
+        params: param
+      }
+    );
+  }
   responseComplain(id: String, data: any) {
 
     return this.http.put<ComplainList>(
       `${constant.complainOnlineUrl}/complain/${id}`, data);
   }
+  responseComplainTwt(id: String, data: any) {
+
+    return this.http.put<ComplainTwitterList>(
+      `${constant.complainOnlineUrl}/complain/twitter/${id}`, data);
+  }
+
   downloadMonitoring(data: FormGroup, category:string): Observable<HttpResponse<Blob>> {
     let httpParam = new HttpParams();
     httpParam = httpParam.append('fromDate', dateFormat(data.value.fromDate));

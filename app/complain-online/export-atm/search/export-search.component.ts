@@ -27,7 +27,7 @@ export class ExportDetailComponent implements OnInit {
   title: string = '';
   id: number;
   modalRef: BsModalRef;
-
+  isTable: boolean[] = [false, false, false];
   category: string = "";
   @Input() form: FormGroup;
   @Output() historyDetail = new EventEmitter();
@@ -50,6 +50,7 @@ export class ExportDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isTable[0] = true;
     if (this.router.url == '/complain-online/export-atm') {
       this.category = 'ATM';
     } else {

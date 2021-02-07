@@ -8,29 +8,31 @@ import { finalize } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { PagedApiResponse, PageRequest } from '../../../lib/model';
 import { isFieldInvalid, normalizeFlag, sortTableFn } from '../../../util';
-import { ComplainList } from '../../model';
+import { ComplainList, ComplainTwitter } from '../../model';
+import { ComplainTwitterList } from '../../model/complain-list-twitter.model';
 import { ResponseAtmService } from '../../service/atm-complain.service';
 
 @Component({
-
-  templateUrl: './response-atm.component.html'
+  selector: 'twitter-datatable',
+  templateUrl: './twitter-table.component.html'
 })
-export class ResponseAtmComponent implements OnInit {
+export class TwitterTableComponent implements OnInit {
 
   ColumnMode = ColumnMode;
   expanded: boolean = false;
-  data: PagedApiResponse<ComplainList>;
+  data: PagedApiResponse<ComplainTwitterList>;
   loadingIndicator: boolean;
   page: PageRequest = new PageRequest();
   sortTableFn = sortTableFn;
   @Input() searchTerm: string;
   modalRef: BsModalRef;
-  dataDetail: ComplainList;
+  dataDetail: ComplainTwitterList;
   registerForm: FormGroup;
   responseComplain: string;
   href: string = "";
   category: string = "";
   isTable: boolean[] = [false, false, false];
+  @Input() isApply: boolean[];
   // registerForm: FormGroup;
   isFieldInvalid = isFieldInvalid;
 
@@ -49,7 +51,7 @@ export class ResponseAtmComponent implements OnInit {
     return !!(this.data && this.data.number) ? this.data.number : 0;
   }
 
-  get rows(): Array<ComplainList> {
+  get rows(): Array<ComplainTwitterList> {
     return !!(this.data && this.data.content) ? this.data.content : [];
   }
 
@@ -58,27 +60,14 @@ export class ResponseAtmComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isTable[0] = true;
-    if (this.router.url == '/complain-online/response-atm') {
-      this.category = 'ATM';
-    } else {
-      this.category = "e-Channel";
-    }
-    this.getMenu();
+    this.getMenu();;
   }
-  getDetailData(data: ComplainList, template: TemplateRef<any>) {
+
+  getDetailData(data: ComplainTwitterList, template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.dataDetail = data;
   }
-  tabClickOnChange(tabMenu: number) {
-    for (let i = 0; i <= this.isTable.length - 1; i++) {
-      if (i == tabMenu) {
-        this.isTable[i] = true;
-      } else {
-        this.isTable[i] = false;
-      }
-    }
-  }
+
   onSubmit() {
 
     this.registerForm.markAllAsTouched();
@@ -86,7 +75,7 @@ export class ResponseAtmComponent implements OnInit {
       return;
     }
 
-    this.responseatmservice.responseComplain(this.dataDetail.noComplain, normalizeFlag(this.registerForm))
+    this.responseatmservice.responseComplainTwt(this.dataDetail.noComplain, normalizeFlag(this.registerForm))
     .subscribe(
       res => {
         if (res) {
@@ -96,7 +85,7 @@ export class ResponseAtmComponent implements OnInit {
         }
       })
   }
-  openModal(data: ComplainList, template: TemplateRef<any>) {
+  openModal(data: ComplainTwitterList, template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.dataDetail = data;
   }
@@ -110,7 +99,7 @@ export class ResponseAtmComponent implements OnInit {
 
 
     this.responseatmservice
-      .getTableRow(param)
+      .getTableRowTwt(param)
       .pipe(finalize(() => this.loadingIndicator = false))
       .subscribe(data => this.data = data);
   }

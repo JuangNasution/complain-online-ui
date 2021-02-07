@@ -1,26 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComplainList } from '../../model';
+import { ComplainTwitterList } from '../../model/complain-list-twitter.model';
 import { ComplainService } from '../../service';
 
 @Component({
-  selector: 'atm-detail',
-  templateUrl: 'atm-detail.component.html'
+  selector: 'twitter-response-detail',
+  templateUrl: 'twitter-detail.component.html'
 })
-export class AtmDetailComponent implements OnInit {
-  complainList: ComplainList;
-  @Input() dataDetail: ComplainList;
-  @Input() isTwitter: boolean;
+export class TwitterDetailResponseComponent implements OnInit {
+  complainList: ComplainTwitterList;
+  @Input() dataDetail: ComplainTwitterList;
   isDetail: boolean = true;
   isResponse: boolean = true;
-
-
 
   constructor(private complainService: ComplainService) { }
 
   ngOnInit() {
     if (this.dataDetail.noComplain) {
         this.complainService
-        .get(this.dataDetail.noComplain)
+        .getId(this.dataDetail.noComplain)
         .subscribe(data => {
           this.complainList = data;
         });

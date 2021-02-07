@@ -67,19 +67,52 @@
         </div>
       </form>
     </div>
-  </div>
-</div>
-
-<div class="animated fadeIn">
-  <div class="card">
     <div class="card-body">
-      <export-complain-detail
-        [form]="form"
-        (historyDetail)="getHistoryDetail($event)"
-        (downloadAction)="downloadMonitoring($event)"
-      >
-      </export-complain-detail>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <button
+            class="btn btn-link nav-link"
+            (click)="tabClickOnChange(0)"
+            [class.active]="isTable[0]"
+          >
+            Sdn
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="btn btn-link nav-link"
+            (click)="tabClickOnChange(1)"
+            [class.active]="isTable[1]"
+          >
+            Consolidated
+          </button>
+        </li>
+      </ul>
+      <div class="row mt-3">
+        <div class="col-12" *ngIf="isTable[0]">
+          <ng-container *ngTemplateOutlet="appDataTable"></ng-container>
+        </div>
+        <div class="col-12" *ngIf="isTable[1]">
+          <twitter-datatable
+          ></twitter-datatable>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<ng-template #appDataTable>
+  <div class="animated fadeIn">
+    <div class="card">
+      <div class="card-body">
+        <export-complain-detail
+          [form]="form"
+          (historyDetail)="getHistoryDetail($event)"
+          (downloadAction)="downloadMonitoring($event)"
+        >
+        </export-complain-detail>
+      </div>
+    </div>
+  </div>
+</ng-template>
 

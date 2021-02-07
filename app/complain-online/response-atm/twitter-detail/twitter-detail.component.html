@@ -1,0 +1,114 @@
+<div class="row px-4">
+  <!-- First Name -->
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> No Complain </strong>
+    <br />
+      {{ complainList?.noComplain }}
+    <ng-template #falseFirstName>-</ng-template>
+  </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Username </strong>
+    <br />
+      {{ complainList?.username }}
+    <ng-template #falseLastName>-</ng-template>
+  </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Subject </strong>
+    <br />
+      {{ complainList?.subject }}
+    <ng-template #falseLastName>-</ng-template>
+  </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Category </strong>
+    <br />
+      {{ complainList?.category }}
+    <ng-template #falseAkaFirstName>-</ng-template>
+  </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Created Date </strong>
+    <br />
+      {{ complainList?.createdDate }}
+    <ng-template #falseAkaLastName>-</ng-template>
+  </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Done Date </strong>
+    <br />
+    <ng-template
+    [ngIf]="complainList?.responseDate"
+    [ngIfElse]="falsedonedate"
+  >
+    {{ dataDetail?.responseDate }}
+  </ng-template>
+    <ng-template #falsedonedate>-</ng-template>
+  </div>
+
+  <!-- Place Of Birth -->
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> status </strong>
+    <br />
+    <ng-template [ngIfElse]="falsestatus" [ngIf]="complainList?.status==='1'">
+      <span class="badge badge-success">Done</span>
+    </ng-template>
+    <ng-template #falsestatus>
+      <span class="badge badge-danger">on Progress</span>
+    </ng-template>
+  </div>
+</div>
+
+<div class="row mt-2 mb-2">
+  <div class="col-12 mt-2">
+    <span
+      (click)="isDetail = !isDetail"
+      [attr.aria-expanded]="!isDetail"
+      style="cursor: pointer"
+      aria-controls="address-info-content"
+    >
+      <i class="fa fa-chevron-{{ isDetail ? 'right' : 'down' }}"></i>
+    </span>
+    <label
+      class="ml-2"
+      style="cursor: pointer"
+      (click)="isDetail = !isDetail"
+    >
+      <strong>Complain Detail</strong>
+    </label>
+  </div>
+</div>
+
+<div class="row border-top" [collapse]="isDetail">
+  <div class="col-12">
+    {{ complainList?.complainDetail }}
+  </div>
+</div>
+
+<div class="row mt-2 mb-2">
+  <div class="col-12 mt-2">
+    <span
+      (click)="isResponse = !isResponse"
+      [attr.aria-expanded]="!isResponse"
+      style="cursor: pointer"
+      aria-controls="citizenship-info-content"
+    >
+      <i class="fa fa-chevron-{{ isResponse ? 'right' : 'down' }}"></i>
+    </span>
+    <label
+      class="ml-2"
+      style="cursor: pointer"
+      (click)="isResponse = !isResponse"
+    >
+      <strong>Complain Response</strong>
+    </label>
+  </div>
+</div>
+
+<div class="row border-top" [collapse]="isResponse">
+  <div class="col-12">
+    {{ complainList?.complainResponse }}
+  </div>
+</div>
+
