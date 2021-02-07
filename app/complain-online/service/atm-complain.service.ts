@@ -30,11 +30,11 @@ export class ResponseAtmService extends BaseCrudTableService<ComplainList>{
     return this.http.put<ComplainList>(
       `${constant.complainOnlineUrl}/complain/${id}`, data);
   }
-  downloadMonitoring(data: FormGroup): Observable<HttpResponse<Blob>> {
+  downloadMonitoring(data: FormGroup, category:string): Observable<HttpResponse<Blob>> {
     let httpParam = new HttpParams();
     httpParam = httpParam.append('fromDate', dateFormat(data.value.fromDate));
     httpParam = httpParam.append('toDate', dateFormat(data.value.toDate));
-    httpParam = httpParam.append('category', 'ATM');
+    httpParam = httpParam.append('category', category);
 
     const httpOptions: Object = {
       observe: 'response',
@@ -46,14 +46,14 @@ export class ResponseAtmService extends BaseCrudTableService<ComplainList>{
       `${constant.complainOnlineUrl}/complain/report?`, httpOptions);
   }
 
-  getHistoryMonitoring(data: FormGroup, page: PageRequest):
+  getHistoryMonitoring(data: FormGroup,category:string, page: PageRequest):
   Observable<PagedApiResponse<ComplainList>> {
 
   let httpParam = new HttpParams();
   httpParam = page.requestParam;
   httpParam = httpParam.append('fromDate', dateFormat(data.value.fromDate));
   httpParam = httpParam.append('toDate', dateFormat(data.value.toDate));
-  httpParam = httpParam.append('category', 'ATM');
+  httpParam = httpParam.append('category', category);
 
   return this.http.get<PagedApiResponse<ComplainList>>(
     `${constant.complainOnlineUrl}/complain/export`, { params: httpParam });

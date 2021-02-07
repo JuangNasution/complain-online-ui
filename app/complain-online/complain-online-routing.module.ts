@@ -34,6 +34,14 @@ const routes: Routes = [
         loadChildren: () => import('./export-atm/export.module').then(mod => mod.ExportModule)
       },
       {
+        path: "response-echannel",
+        loadChildren: () => import('./response-atm/response-atm.module').then(mod => mod.ResponseAtmModule)
+      },
+      {
+        path: "export-echannel",
+        loadChildren: () => import('./export-atm/export.module').then(mod => mod.ExportModule)
+      },
+      {
         path: "twitter",
         loadChildren: () => import('./response-admin-twitter/response-admin.module').then(mod => mod.ResponseAtmModule)
       }

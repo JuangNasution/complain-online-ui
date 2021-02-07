@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { finalize } from 'rxjs/operators';
 import { PagedApiResponse, PageRequest } from '../../../lib/model';
 import { sortTableFn } from '../../../util';
 import { ComplainList } from '../../model';
-import { ComplainService } from '../../service';
 import { ResponseAtmService } from '../../service/atm-complain.service';
 
 @Component({
@@ -27,6 +27,8 @@ export class ExportDetailComponent implements OnInit {
   title: string = '';
   id: number;
   modalRef: BsModalRef;
+
+  category: string = "";
   @Input() form: FormGroup;
   @Output() historyDetail = new EventEmitter();
   @Output() downloadAction = new EventEmitter();
@@ -34,7 +36,7 @@ export class ExportDetailComponent implements OnInit {
 
   constructor(private responseAtmResponse: ResponseAtmService,
     private modalService: BsModalService,
-    private complainService: ComplainService) { }
+    private router: Router) { }
   get offset(): number {
     return !!(this.data && this.data.number) ? this.data.number : 0;
   }
@@ -48,13 +50,18 @@ export class ExportDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url == '/complain-online/export-atm') {
+      this.category = 'ATM';
+    } else {
+      this.category = "e-Channel";
+    }
     this.getHistory();
   }
   getHistory(pageNumber: number = 1) {
     this.loadingIndicator = true;
     this.page.page = pageNumber;
 
-    this.responseAtmResponse.getHistoryMonitoring(this.form, this.page)
+    this.responseAtmResponse.getHistoryMonitoring(this.form, this.category, this.page)
       .pipe(
         finalize(() => this.loadingIndicator = false)
       ).subscribe(data => this.data = data);

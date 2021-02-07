@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { finalize } from 'rxjs/operators';
@@ -27,16 +28,20 @@ export class ResponseAtmComponent implements OnInit {
   dataDetail: ComplainList;
   registerForm: FormGroup;
   responseComplain: string;
+  href: string = "";
+  category: string = "";
   // registerForm: FormGroup;
   isFieldInvalid = isFieldInvalid;
 
   constructor(private responseatmservice: ResponseAtmService,
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
+    private router:Router
   ) {
     this.registerForm = this.formBuilder.group({
       complainResponse: new FormControl(null, Validators.required),
     });
+
   }
 
   get offset(): number {
@@ -52,6 +57,12 @@ export class ResponseAtmComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url == '/complain-online/response-atm') {
+      this.category = 'ATM';
+    } else {
+      this.category = "e-Channel";
+    }
+    console.log(this.router.url);
     this.getMenu();
   }
   getDetailData(data: ComplainList, template: TemplateRef<any>) {
@@ -85,7 +96,7 @@ export class ResponseAtmComponent implements OnInit {
     this.page.page = pageNumber;
     let param: HttpParams = new HttpParams();
     param = this.page.requestParam;
-    param = param.append('category', 'ATM');
+    param = param.append('category', this.category);
 
 
     this.responseatmservice

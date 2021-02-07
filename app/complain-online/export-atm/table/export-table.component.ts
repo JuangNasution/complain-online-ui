@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { BsModalRef } from 'ngx-bootstrap';
 import { finalize } from 'rxjs/operators';
@@ -31,12 +32,14 @@ export class ExportTableComponent implements OnInit {
   modalRef: BsModalRef;
   dataDetail: ComplainList;
   complainList: ComplainList;
+  category: string;
   @ViewChild(ExportDetailComponent, { static: false })
   exportDetailComponent: ExportDetailComponent;
 
   constructor(private responseAtmService: ResponseAtmService,
     private fb: FormBuilder,
-    private complainService: ComplainService) {
+    private complainService: ComplainService,
+    private router: Router) {
       this.form = this.fb.group({
         fromDate: new FormControl(new Date(), Validators.required),
         toDate: new FormControl(new Date(), Validators.required),
@@ -44,6 +47,11 @@ export class ExportTableComponent implements OnInit {
       })
      }
   ngOnInit() {
+    if (this.router.url == '/complain-online/export-atm') {
+      this.category = 'ATM';
+    } else {
+      this.category = "e-Channel";
+    }
   }
   getHistoryDetail(id: string) {
     this.isShowDetail = false;
@@ -54,7 +62,7 @@ export class ExportTableComponent implements OnInit {
 
   downloadMonitoring(isDownloaded: boolean) {
     if (isDownloaded) {
-      this.responseAtmService.downloadMonitoring(this.form)
+      this.responseAtmService.downloadMonitoring(this.form,this.category)
         .subscribe(data => Download(data));
     }
   }
