@@ -87,15 +87,15 @@
     <form [formGroup]="registerForm" (ngSubmit)='onSubmit()' >
       <div class="input-group mb-3">
         <input
-          formControlName="token"
-          [class.is-invalid]="isFieldInvalid(registerForm, 'token')"
+          formControlName="confirmationToken"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'confirmationToken')"
           class="form-control"
           type="text"
           required
         >
-        <ng-container *ngIf="isFieldInvalid(registerForm, 'token')">
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'confirmationToken')">
           <div
-          *ngIf="registerForm.get('token').hasError('required')"
+          *ngIf="registerForm.get('confirmationToken').hasError('required')"
           class="invalid-feedback"
         >
           Token is required.

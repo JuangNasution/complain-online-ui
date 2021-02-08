@@ -1,63 +1,77 @@
-<div class="row px-4">
-  <!-- First Name -->
-  <div class="col-sm-6 mt-2 pl-0">
-    <strong> User Twitter </strong>
-    <br />
-      {{ complainTwitter?.user }}
-    <ng-template #falseFirstName>-</ng-template>
-  </div>
 
-  <div class="col-sm-6 mt-2 pl-0">
-    <strong> Created Date </strong>
-    <br />
-      {{ complainTwitter?.createdAt | date:'medium' }}
-    <ng-template #falseAkaFirstName>-</ng-template>
-  </div>
+  <form [formGroup]="registerForm" (ngSubmit)='onRegsit()' >
+    <div class="input-group mb-3">
+      <input
+        formControlName="name"
+        class="form-control"
+        type="text"
+        disabled
+        hidden
+      >
+    </div>
 
-
-
-  <!-- Place Of Birth -->
-  <!-- <div class="col-sm-6 mt-2 pl-0">
-    <strong> status </strong>
-    <br />
-    <ng-template [ngIfElse]="falsestatus" [ngIf]="complainTwitter?.status==='1'">
-      <span class="badge badge-success">Done</span>
-    </ng-template>
-    <ng-template #falsestatus>
-      <span class="badge badge-danger">on Progress</span>
-    </ng-template>
-  </div> -->
-
-  <!-- Date Of Birth -->
-  <!-- <div class="col-sm-6 mt-2 pl-0">
-    <strong> Card Number </strong>
-    <br />
-      {{ complainTwitter?.cardNumber }}
-  </div> -->
-</div>
-
-<div class="row mt-2 mb-2">
-  <div class="col-12 mt-2">
-    <span
-      (click)="isDetail = !isDetail"
-      [attr.aria-expanded]="!isDetail"
-      style="cursor: pointer"
-      aria-controls="address-info-content"
-    >
-      <i class="fa fa-chevron-{{ isDetail ? 'right' : 'down' }}"></i>
-    </span>
-    <label
-      class="ml-2"
-      style="cursor: pointer"
-      (click)="isDetail = !isDetail"
-    >
-      <strong>Complain Detail</strong>
-    </label>
-  </div>
-</div>
-
-<div class="row border-top" [collapse]="isDetail">
-  <div class="col-12">
-    {{ complainTwitter?.text }}
-  </div>
-</div>
+    <label>Subject</label>
+    <div class="input-group mb-3">
+      <input
+        formControlName="name"
+        class="form-control"
+        type="text"
+        required
+      >
+    </div>
+    <fieldset class="form-group">
+      <label class="col-form-label required" for="icon">Category</label>
+      <ng-select
+        [items]="categories"
+        [virtualScroll]="true"
+        bindLabel="name"
+        bindValue="value"
+        formControlName="category"
+        groupBy="groupName"
+        id="category"
+        labelForId="category"
+        placeholder="Select category"
+      >
+        <ng-template
+          let-name="item.name"
+          let-value="item.value"
+          ng-label-tmp
+        >
+          {{ name }}
+        </ng-template>
+        <ng-template
+          let-groupName="item.groupName"
+          let-index="index"
+          ng-optgroup-tmp
+        >
+          Select <b>"{{ groupName }}"</b>
+        </ng-template>
+        <ng-template
+          let-name="item.name"
+          let-value="item.value"
+          ng-option-tmp
+        >
+          <i [class]="'icons ' + value"></i>
+          {{ name }}
+        </ng-template>
+      </ng-select>
+    </fieldset>
+    <label>Name</label>
+    <div class="input-group mb-3">
+      <input
+        formControlName="name"
+        class="form-control"
+        type="text"
+        disabled
+      >
+    </div>
+    <label>Complain Detail</label>
+    <div class="input-group mb-3">
+      <textarea
+        formControlName="name"
+        class="form-control"
+        type="text"
+        disabled
+      ></textarea>
+    </div>
+  </form>

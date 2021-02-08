@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { categories } from '../../create-complain/create-category.model';
+import { categories, CreateCategoryModel } from '../../create-complain/create-category.model';
 import { ComplainList, ComplainTwitter } from '../../model';
 import { ComplainService } from '../../service';
 
@@ -15,6 +15,7 @@ export class TwitterDetailComponent implements OnInit {
   @Input() dataDetail: ComplainTwitter;
   isDetail: boolean = true;
   isResponse: boolean = true;
+  categories: CreateCategoryModel[];
 
   // @Input() dataDetail: SdnData;
   // @Input() component: string;
