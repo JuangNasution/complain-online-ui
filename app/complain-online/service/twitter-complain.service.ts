@@ -10,7 +10,7 @@ import { ComplainTwitter } from '../model';
 export class TwitterComplainService extends BaseCrudTableService<ComplainTwitter> {
 
   constructor(http: HttpClient) {
-    super(http, `${constant.complainOnlineUrl}/complain`);
+    super(http, `${constant.complainOnlineUrl}/complain/twitter`);
   }
 
   getTwit(): Observable<ComplainTwitter> {
