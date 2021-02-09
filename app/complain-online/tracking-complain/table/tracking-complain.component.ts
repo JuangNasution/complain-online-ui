@@ -40,7 +40,7 @@ export class MenuTableComponent implements OnInit {
     this.getMenu();
   }
 
-  getMenu(pageNumber: number = 1) {
+  getMenu(pageNumber: number = 0) {
     this.loadingIndicator = true;
     this.page.page = pageNumber;
 

@@ -94,7 +94,7 @@ export class ExportTableComponent implements OnInit {
         .subscribe(data => Download(data));
 
   }
-  getHistory(pageNumber: number = 1) {
+  getHistory(pageNumber: number = 0) {
     this.loadingIndicator = true;
     this.page.page = pageNumber;
 

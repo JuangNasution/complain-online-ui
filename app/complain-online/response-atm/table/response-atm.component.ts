@@ -101,7 +101,7 @@ export class ResponseAtmComponent implements OnInit {
     this.dataDetail = data;
   }
 
-  getMenu(pageNumber: number = 1) {
+  getMenu(pageNumber: number = 0) {
     this.loadingIndicator = true;
     this.page.page = pageNumber;
     let param: HttpParams = new HttpParams();

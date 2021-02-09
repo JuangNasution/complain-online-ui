@@ -94,7 +94,7 @@ export class TwitterTableComponent implements OnInit {
     this.dataDetail = data;
   }
 
-  getHistoryTwt(pageNumber: number = 1) {
+  getHistoryTwt(pageNumber: number = 0) {
     this.loadingIndicator = true;
     this.page.page = pageNumber;
 

@@ -19,7 +19,7 @@ import { AuthService } from '../../services';
 
 export class LoginComponent implements OnInit {
   // @ViewChild('template', {static: false}) template: ModalDirective;
-  @ViewChild(RegisterComponent, {static: false}) register: RegisterComponent
+  @ViewChild(RegisterComponent, { static: false }) register: RegisterComponent
   isDevelopment = !environment.production;
   userLogin = {
     username: '',
@@ -63,14 +63,14 @@ export class LoginComponent implements OnInit {
         res => {
           if (res == 'Wrong Token') {
             Swal.fire('Failed!', res.toString(), 'error')
-          }else if (res == 'Your Account Already Activated') {
-            Swal.fire('Failed!', res.toString() , 'error').then(function () {
+          } else if (res == 'Your Account Already Activated') {
+            Swal.fire('Failed!', res.toString(), 'error').then(function () {
               location.reload();
-          });
+            });
           } else {
-            Swal.fire('Congratulations!', res.toString() , 'success').then(function () {
+            Swal.fire('Congratulations!', res.toString(), 'success').then(function () {
               location.reload();
-          });
+            });
           }
         }
       )
@@ -82,39 +82,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.userLogin.username, this.userLogin.password)
-    .subscribe(
-      _ => this.router.navigateByUrl('/dashboard'),
-      (error: HttpErrorResponse) => {
-        let errorResponse = error as HttpErrorResponse;
-        if (errorResponse.status === 401 || errorResponse.status === 400) {
-          this.wrongPassword = true;
+      .subscribe(
+        _ => this.router.navigateByUrl('/dashboard'),
+        (error: HttpErrorResponse) => {
+          let errorResponse = error as HttpErrorResponse;
+          if (errorResponse.status === 401 || errorResponse.status === 400) {
+            this.wrongPassword = true;
+          }
         }
-      }
-    );
+      );
 
-    // this.registerService.loginTemp(this.userLogin.username, this.userLogin.password)
-    //   .subscribe(
-    //     res => {
-    //       if (res == 'email not found') {
-    //         Swal.fire('Failed!', res, 'error')
-    //       }else if (res == 'wrong password') {
-    //         Swal.fire('Failed!', res , 'error')
-    //       } else if (res == 'account not activated yet') {
-    //         Swal.fire('Failed!', res , 'error')
-    //       } else {
-    //         this.authService.login(this.userLogin.username, this.userLogin.password)
-    //         .subscribe(
-    //           _ => this.router.navigateByUrl('/dashboard'),
-    //           (error: HttpErrorResponse) => {
-    //             let errorResponse = error as HttpErrorResponse;
-    //             if (errorResponse.status === 401 || errorResponse.status === 400) {
-    //               this.wrongPassword = true;
-    //             }
-    //           }
-    //         );
-    //       }
-    //   }
-    // )
   }
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
