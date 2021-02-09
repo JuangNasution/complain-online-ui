@@ -24,6 +24,7 @@ import {
   P403Component,
   P404Component,
   P500Component,
+  ActivationComponent,
 } from './views';
 
 // noinspection JSUnusedLocalSymbols
@@ -65,7 +66,8 @@ const APP_CONTAINERS = [DefaultLayoutComponent];
     ...APP_CONTAINERS,
     P403Component,
     P404Component,
-    P500Component
+    P500Component,
+    ActivationComponent,
   ],
   entryComponents: [BlockUiTemplateComponent],
   exports: [

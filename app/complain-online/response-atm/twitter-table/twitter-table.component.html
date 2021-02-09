@@ -125,7 +125,7 @@
           <span class="badge badge-success">Done</span>
         </ng-template>
         <ng-template #falseInactive>
-          <span class="badge badge-danger">on Progress</span>
+          <span class="badge badge-warning">on Progress</span>
         </ng-template>
       </ng-template>
     </ngx-datatable-column>
@@ -195,8 +195,69 @@
       </button>
     </div>
     <div class="modal-body">
-      <h5>Insert Response Below</h5>
       <form [formGroup]="registerForm" (ngSubmit)='onSubmit()'>
+
+        <label>No Complain</label>
+      <div class="input-group mb-3">
+        <input
+          [readOnly]=true
+          formControlName="noComplain"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'noComplain')"
+          class="form-control"
+          type="text"
+          required
+        >
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'noComplain')">
+          <div
+          *ngIf="registerForm.get('noComplain').hasError('required')"
+          class="invalid-feedback"
+        >
+          Response is required.
+        </div>
+        </ng-container>
+      </div>
+
+      <label>Subject</label>
+      <div class="input-group mb-3">
+        <input
+          [readOnly]=true
+          formControlName="subject"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'subject')"
+          class="form-control"
+          type="text"
+          required
+        >
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'complainResponse')">
+          <div
+          *ngIf="registerForm.get('complainResponse').hasError('required')"
+          class="invalid-feedback"
+        >
+          Response is required.
+        </div>
+        </ng-container>
+      </div>
+
+      <label>Complain</label>
+      <div class="input-group mb-3">
+        <textarea
+          [readOnly]=true
+          formControlName="complainDetail"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'complainDetail')"
+          class="form-control"
+          type="text"
+          required
+        ></textarea>
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'complainDetail')">
+          <div
+          *ngIf="registerForm.get('complainDetail').hasError('required')"
+          class="invalid-feedback"
+        >
+          Response is required.
+        </div>
+        </ng-container>
+      </div>
+
+      <label>Insert Response Below</label>
         <div class="input-group mb-3">
           <textarea
             formControlName="complainResponse"
