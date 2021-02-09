@@ -10,10 +10,14 @@ import { ComplainTwitter } from '../model';
 export class TwitterComplainService extends BaseCrudTableService<ComplainTwitter> {
 
   constructor(http: HttpClient) {
-    super(http, `${constant.complainOnlineUrl}/complain`);
+    super(http, `${constant.complainOnlineUrl}/complain/twitter`);
   }
 
   getTwit(): Observable<ComplainTwitter> {
     return this.http.get<ComplainTwitter>(`${constant.complainOnlineUrl}/complain/twitter`);
+  }
+  dropTwt(id: string) {
+    return this.http.put(
+      `${constant.complainOnlineUrl}/complain/drop-twitter/${id}`,"");
   }
 }

@@ -60,7 +60,13 @@ export class TwitterTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getMenu();;
+    if (this.router.url == '/complain-online/response-atm') {
+      this.category = 'ATM';
+    } else {
+      this.category = "e-Channel";
+    }
+    this.getMenu();
+
   }
 
   getDetailData(data: ComplainTwitterList, template: TemplateRef<any>) {

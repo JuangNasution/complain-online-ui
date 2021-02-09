@@ -1,77 +1,110 @@
+<form [formGroup]="complainTwitterForm" (ngSubmit)='onSubmit()'>
+  <div class="row">
 
-  <form [formGroup]="registerForm" (ngSubmit)='onRegsit()' >
-    <div class="input-group mb-3">
-      <input
-        formControlName="name"
-        class="form-control"
-        type="text"
-        disabled
-        hidden
-      >
+    <!-- User -->
+    <div class="col-sm-12">
+      <fieldset class="form-group">
+        <label class="col-form-label" for="subject">User</label>
+        <input
+          [readonly]="true"
+          [class.is-invalid]="isFieldInvalid(complainTwitterForm, 'username')"
+          class="form-control"
+          formControlName="username"
+          id="username"
+          type="text"
+        >
+      </fieldset>
     </div>
 
-    <label>Subject</label>
-    <div class="input-group mb-3">
-      <input
-        formControlName="name"
-        class="form-control"
-        type="text"
-        required
-      >
+    <!-- User -->
+    <div class="col-sm-12">
+      <fieldset class="form-group">
+        <label class="col-form-label required" for="textarea-input">Complain</label>
+        <textarea
+          [readonly]="true"
+          [class.is-invalid]="isFieldInvalid(complainTwitterForm, 'complainDetail')"
+          class="form-control"
+          formControlName="complainDetail"
+          id="complainDetail"
+          name="complainDetail"
+          rows="5"
+          ></textarea>
+          <ng-container *ngIf="isFieldInvalid(complainTwitterForm,'complainDetail')">
+            <div *ngIf="complainTwitterForm.get('complainDetail').hasError('required')" class="invalid-feedback">
+              Complain is required
+            </div>
+          </ng-container>
+      </fieldset>
     </div>
-    <fieldset class="form-group">
-      <label class="col-form-label required" for="icon">Category</label>
-      <ng-select
-        [items]="categories"
-        [virtualScroll]="true"
-        bindLabel="name"
-        bindValue="value"
-        formControlName="category"
-        groupBy="groupName"
-        id="category"
-        labelForId="category"
-        placeholder="Select category"
-      >
-        <ng-template
-          let-name="item.name"
-          let-value="item.value"
-          ng-label-tmp
+
+    <!-- Title -->
+    <div class="col-sm-12">
+      <fieldset class="form-group">
+        <label class="col-form-label required" for="subject">Subject</label>
+        <input
+          [(ngModel)]="subject"
+          [class.is-invalid]="isFieldInvalid(complainTwitterForm, 'subject')"
+          class="form-control"
+          formControlName="subject"
+          id="subject"
+          type="text"
+          placeholder="Subject Complain"
         >
-          {{ name }}
-        </ng-template>
-        <ng-template
-          let-groupName="item.groupName"
-          let-index="index"
-          ng-optgroup-tmp
-        >
-          Select <b>"{{ groupName }}"</b>
-        </ng-template>
-        <ng-template
-          let-name="item.name"
-          let-value="item.value"
-          ng-option-tmp
-        >
-          <i [class]="'icons ' + value"></i>
-          {{ name }}
-        </ng-template>
-      </ng-select>
-    </fieldset>
-    <label>Name</label>
-    <div class="input-group mb-3">
-      <input
-        formControlName="name"
-        class="form-control"
-        type="text"
-        disabled
-      >
+        <ng-container *ngIf="isFieldInvalid(complainTwitterForm,'subject')">
+          <div *ngIf="complainTwitterForm.get('subject').hasError('required')" class="invalid-feedback">
+            Subject is required
+          </div>
+        </ng-container>
+      </fieldset>
     </div>
-    <label>Complain Detail</label>
-    <div class="input-group mb-3">
-      <textarea
-        formControlName="name"
-        class="form-control"
-        type="text"
-        disabled
-      ></textarea>
+
+    <!-- Category -->
+    <div class="col-sm-12">
+      <fieldset class="form-group">
+        <label class="col-form-label required" for="icon">Category</label>
+        <ng-select
+          [(ngModel)]="category"
+          [items]="categories"
+          [virtualScroll]="true"
+          bindLabel="name"
+          bindValue="value"
+          formControlName="category"
+          groupBy="groupName"
+          id="category"
+          labelForId="category"
+          placeholder="Select category"
+        >
+          <ng-template
+            let-name="item.name"
+            let-value="item.value"
+            ng-label-tmp
+          >
+            {{ name }}
+          </ng-template>
+          <ng-template
+            let-groupName="item.groupName"
+            let-index="index"
+            ng-optgroup-tmp
+          >
+            Select <b>"{{ groupName }}"</b>
+          </ng-template>
+        </ng-select>
+        <ng-container *ngIf="isFieldInvalid(complainTwitterForm,'category')">
+          <div *ngIf="complainTwitterForm.get('category').hasError('required')" class="invalid-feedback">
+            Subject is required
+          </div>
+        </ng-container>
+      </fieldset>
     </div>
-  </form>
+
+    <div class="col-auto ml-auto">
+      <button
+      class="btn btn-sm btn-primary"
+      type="submit"
+      >
+        <i class="fa fa-send"></i> Send to PIC
+      </button>&nbsp;
+    </div>
+
+  </div>
+</form>

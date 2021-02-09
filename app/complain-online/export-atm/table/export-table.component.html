@@ -68,6 +68,17 @@
       </form>
     </div>
     <div class="card-body">
+      <div class="row button-table">
+        <div class="col-12 d-flex justify-content-end">
+          <button
+            class="btn btn-sm btn-success"
+            [disabled]="!data?.content?.length"
+            (click)="downloadMonitoring()"
+          >
+            <i class="fa fa-sm fa-download"></i>&nbsp;Download
+          </button>
+        </div>
+      </div>
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <button
@@ -93,7 +104,7 @@
           <ng-container *ngTemplateOutlet="appDataTable"></ng-container>
         </div>
         <div class="col-12" *ngIf="isTable[1]">
-          <twitter-datatable
+          <twitter-datatable [form]="form"
           ></twitter-datatable>
         </div>
       </div>
@@ -102,17 +113,133 @@
 </div>
 
 <ng-template #appDataTable>
-  <div class="animated fadeIn">
-    <div class="card">
-      <div class="card-body">
-        <export-complain-detail
-          [form]="form"
-          (historyDetail)="getHistoryDetail($event)"
-          (downloadAction)="downloadMonitoring($event)"
-        >
-        </export-complain-detail>
-      </div>
-    </div>
+  <ngx-datatable
+      #tableHistory
+      (page)="getHistory($event.offset + 1)"
+      (sort)="sortTableFn(page, $event); getHistory()"
+      [offset]="offset"
+      [count]="totalElements"
+      [externalPaging]="true"
+      [columnMode]="ColumnMode.force"
+      [externalSorting]="true"
+      [loadingIndicator]="loadingIndicator"
+      [footerHeight]="50"
+      [headerHeight]="50"
+      [rowHeight]="50"
+      [limit]="page.size"
+      [scrollbarH]="true"
+      [rows]="rows"
+      class="material striped"
+    >
+
+      <!-- No complain -->
+      <ngx-datatable-column
+      [draggable]="false"
+      [sortable]="true"
+      name="No Complain"
+      prop="noComplain"
+    >
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | ellipsis: 15 }}
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- Subject complain -->
+    <ngx-datatable-column
+    [draggable]="false"
+    [sortable]="true"
+    name="Subject"
+    prop="subject"
+    >
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{ value | ellipsis: 15 }}
+    </ng-template>
+    </ngx-datatable-column>
+    <!-- Category -->
+    <ngx-datatable-column
+      [draggable]="false"
+      [sortable]="true"
+      name="Category"
+      prop="category"
+    >
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | ellipsis: 15 }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <!-- Date -->
+    <ngx-datatable-column
+      [cellClass]="'d-none d-md-inline'"
+      [draggable]="false"
+      [headerClass]="'d-none d-md-inline'"
+      [sortable]="true"
+      name="Created Date"
+      prop="createdDate"
+    >
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | date }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <!-- Status-->
+    <ngx-datatable-column
+      [cellClass]="'d-none d-md-inline'"
+      [draggable]="false"
+      [headerClass]="'d-none d-md-inline'"
+      [sortable]="true"
+      name="Status"
+      prop="status"
+    >
+      <ng-template
+        let-value="value"
+        ngx-datatable-cell-template
+      >
+        <ng-template [ngIfElse]="falseInactive" [ngIf]="value === 1">
+          <span class="badge badge-success">Done</span>
+        </ng-template>
+        <ng-template #falseInactive>
+          <span class="badge badge-danger">on Progress</span>
+        </ng-template>
+      </ng-template>
+    </ngx-datatable-column>
+
+      <!-- Action -->
+      <ngx-datatable-column
+        [cellClass]="'d-none d-md-inline'"
+        [draggable]="false"
+        [headerClass]="'d-none d-md-inline'"
+        [sortable]="true"
+        [width]="60"
+        name="Action"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button
+            class="btn btn-sm btn-primary"
+            type="button"
+            title="detail"
+            (click)="getDetailData(row,detailComplain)"
+            data-toggle="tooltip"
+          >
+            <i class="fa fa-sm fa-eye"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+</ng-template>
+
+<ng-template #detailComplain>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Complain Detail</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body mb-5">
+    <export-detail [dataDetail]="dataDetail" ></export-detail>
   </div>
 </ng-template>
 

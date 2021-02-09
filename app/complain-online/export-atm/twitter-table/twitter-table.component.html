@@ -1,8 +1,8 @@
 
   <ngx-datatable #twtDataTable
     #table
-    (page)="getMenu($event.offset + 1)"
-    (sort)="sortTableFn(page, $event); getMenu();"
+    (page)="getHistoryTwt($event.offset + 1)"
+    (sort)="sortTableFn(page, $event); getHistoryTwt();"
     [columnMode]="ColumnMode.force"
     [count]="totalElements"
     [externalPaging]="true"

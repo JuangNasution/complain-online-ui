@@ -74,4 +74,16 @@ export class ResponseAtmService extends BaseCrudTableService<ComplainList>{
   return this.http.get<PagedApiResponse<ComplainList>>(
     `${constant.complainOnlineUrl}/complain/export`, { params: httpParam });
 }
+  getHistoryMonitoringTwt(data: FormGroup,category:string, page: PageRequest):
+  Observable<PagedApiResponse<ComplainTwitterList>> {
+
+  let httpParam = new HttpParams();
+  httpParam = page.requestParam;
+  httpParam = httpParam.append('fromDate', dateFormat(data.value.fromDate));
+  httpParam = httpParam.append('toDate', dateFormat(data.value.toDate));
+  httpParam = httpParam.append('category', category);
+
+  return this.http.get<PagedApiResponse<ComplainTwitterList>>(
+    `${constant.complainOnlineUrl}/complain/twitter/export`, { params: httpParam });
+}
 }

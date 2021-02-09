@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,7 +7,6 @@ import { finalize } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { PagedApiResponse, PageRequest } from '../../../lib/model';
 import { isFieldInvalid, normalizeFlag, sortTableFn } from '../../../util';
-import { ComplainList, ComplainTwitter } from '../../model';
 import { ComplainTwitterList } from '../../model/complain-list-twitter.model';
 import { ResponseAtmService } from '../../service/atm-complain.service';
 
@@ -33,10 +31,11 @@ export class TwitterTableComponent implements OnInit {
   category: string = "";
   isTable: boolean[] = [false, false, false];
   @Input() isApply: boolean[];
+  @Input() form: FormGroup;
   // registerForm: FormGroup;
   isFieldInvalid = isFieldInvalid;
 
-  constructor(private responseatmservice: ResponseAtmService,
+  constructor(private responseAtmResponse: ResponseAtmService,
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
     private router:Router
@@ -60,7 +59,12 @@ export class TwitterTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getMenu();;
+    if (this.router.url == '/complain-online/export-atm') {
+      this.category = 'ATM';
+    } else {
+      this.category = "e-Channel";
+    }
+    this.getHistoryTwt();
   }
 
   getDetailData(data: ComplainTwitterList, template: TemplateRef<any>) {
@@ -75,7 +79,7 @@ export class TwitterTableComponent implements OnInit {
       return;
     }
 
-    this.responseatmservice.responseComplainTwt(this.dataDetail.noComplain, normalizeFlag(this.registerForm))
+    this.responseAtmResponse.responseComplainTwt(this.dataDetail.noComplain, normalizeFlag(this.registerForm))
     .subscribe(
       res => {
         if (res) {
@@ -90,18 +94,14 @@ export class TwitterTableComponent implements OnInit {
     this.dataDetail = data;
   }
 
-  getMenu(pageNumber: number = 1) {
+  getHistoryTwt(pageNumber: number = 1) {
     this.loadingIndicator = true;
     this.page.page = pageNumber;
-    let param: HttpParams = new HttpParams();
-    param = this.page.requestParam;
-    param = param.append('category', this.category);
 
-
-    this.responseatmservice
-      .getTableRowTwt(param)
-      .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe(data => this.data = data);
+    this.responseAtmResponse.getHistoryMonitoringTwt(this.form, this.category, this.page)
+      .pipe(
+        finalize(() => this.loadingIndicator = false)
+    ).subscribe(data => this.data = data);
   }
 
 }

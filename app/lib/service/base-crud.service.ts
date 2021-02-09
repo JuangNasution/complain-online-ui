@@ -22,7 +22,7 @@ export abstract class BaseCrudService<T> implements Crud<T> {
   }
 
   add(newData: any): Observable<T> {
-    console.log(newData)
+    // console.log(newData)
     return this.http.post<T>(`${this.url}`, newData);
   }
 
