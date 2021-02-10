@@ -8,7 +8,7 @@
   </div>
 
   <div class="col-sm-6 mt-2 pl-0">
-    <strong> Subject </strong>
+    <strong> Title </strong>
     <br />
       {{ complainList?.subject }}
     <ng-template #falseLastName>-</ng-template>
@@ -24,7 +24,7 @@
   <div class="col-sm-6 mt-2 pl-0">
     <strong> Created Date </strong>
     <br />
-      {{ complainList?.createdDate }}
+      {{ complainList?.createdDate | date:"medium" }}
     <ng-template #falseAkaLastName>-</ng-template>
   </div>
 

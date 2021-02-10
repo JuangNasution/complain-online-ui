@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +10,7 @@ import Swal from 'sweetalert2';
 import { PagedApiResponse, PageRequest } from '../../../lib/model';
 import { isFieldInvalid, normalizeFlag, sortTableFn } from '../../../util';
 import { ComplainList } from '../../model';
+import { ComplainService } from '../../service';
 import { ResponseAtmService } from '../../service/atm-complain.service';
 
 @Component({
@@ -33,17 +35,21 @@ export class ResponseAtmComponent implements OnInit {
   isTable: boolean[] = [false, false, false];
   // registerForm: FormGroup;
   isFieldInvalid = isFieldInvalid;
+  pipe = new DatePipe('en-US');
 
   constructor(private responseatmservice: ResponseAtmService,
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
-    private router:Router
+    private router:Router,
+    private complainService: ComplainService
   ) {
     this.registerForm = this.formBuilder.group({
       complainResponse: new FormControl(null, Validators.required),
       subject: new FormControl(null, Validators.required),
       complainDetail: new FormControl(null, Validators.required),
       noComplain: new FormControl(null, Validators.required),
+      createdDate: new FormControl(null, Validators.required),
+      cardNumber: new FormControl(null, Validators.required),
     });
 
   }
@@ -74,6 +80,31 @@ export class ResponseAtmComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
     this.dataDetail = data;
   }
+
+  openModal(data: ComplainList, template: TemplateRef<any>) {
+
+    if (data.noComplain) {
+      this.complainService
+      .get(data.noComplain)
+      .subscribe(data => {
+        this.setModalResponse(data)
+      });
+    }
+
+    this.modalRef = this.modalService.show(template);
+    this.dataDetail = data;
+  }
+
+  setModalResponse(data: ComplainList){
+    this.registerForm.patchValue({
+      "subject":data.subject,
+      "complainDetail":data.complainDetail,
+      "noComplain":data.noComplain,
+      "cardNumber":data.cardNumber,
+      "createdDate": this.pipe.transform(data.createdDate, 'short'),
+    })
+  }
+
   tabClickOnChange(tabMenu: number) {
     for (let i = 0; i <= this.isTable.length - 1; i++) {
       if (i == tabMenu) {
@@ -99,15 +130,6 @@ export class ResponseAtmComponent implements OnInit {
         });
         }
       })
-  }
-  openModal(data: ComplainList, template: TemplateRef<any>) {
-    this.registerForm.patchValue({
-      "subject":data.subject,
-      "complainDetail":data.complainDetail,
-      "noComplain":data.noComplain,
-    })
-    this.modalRef = this.modalService.show(template);
-    this.dataDetail = data;
   }
 
   getMenu(pageNumber: number = 0) {

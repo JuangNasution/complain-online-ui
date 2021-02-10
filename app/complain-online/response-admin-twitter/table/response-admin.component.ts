@@ -24,8 +24,8 @@ export class ResponseTwitterComponent implements OnInit {
 
   ColumnMode = ColumnMode;
 
-  data: ComplainTwitter;
-  // data: ComplainTwitter[];
+  // data: ComplainTwitter;
+  data: ComplainTwitter[];
   dataDetail: ComplainTwitter;
 
 
@@ -83,12 +83,12 @@ export class ResponseTwitterComponent implements OnInit {
 
   getTwit() {
     this.loadingIndicator = true;
-    // this.data= twitDummy;
+    this.data= twitDummy;
 
-    this.twitterComplainService
-      .getTwit()
-      .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe(data => this.data= data);
+    // this.twitterComplainService
+    //   .getTwit()
+    //   .pipe(finalize(() => this.loadingIndicator = false))
+    //   .subscribe(data => this.data= data);
   }
 
 

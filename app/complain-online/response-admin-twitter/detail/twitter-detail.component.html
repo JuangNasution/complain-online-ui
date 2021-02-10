@@ -40,7 +40,7 @@
     <!-- Title -->
     <div class="col-sm-12">
       <fieldset class="form-group">
-        <label class="col-form-label required" for="subject">Subject</label>
+        <label class="col-form-label required" for="subject">Title</label>
         <input
           [(ngModel)]="subject"
           [class.is-invalid]="isFieldInvalid(complainTwitterForm, 'subject')"
@@ -48,7 +48,7 @@
           formControlName="subject"
           id="subject"
           type="text"
-          placeholder="Subject Complain"
+          placeholder="Title Complain"
         >
         <ng-container *ngIf="isFieldInvalid(complainTwitterForm,'subject')">
           <div *ngIf="complainTwitterForm.get('subject').hasError('required')" class="invalid-feedback">

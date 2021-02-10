@@ -22,6 +22,7 @@ export class AtmDetailComponent implements OnInit {
         this.complainService
         .get(this.dataDetail.noComplain)
         .subscribe(data => {
+          console.log(data)
           this.complainList = data;
         });
     }

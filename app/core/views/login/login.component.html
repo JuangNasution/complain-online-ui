@@ -52,13 +52,13 @@
               <p [hidden]="!wrongPassword" class="text-danger">Wrong username or password.</p>
               <div class="row">
                 <div class="col-12">
-                  <button class="btn btn-block btn-primary px-4">Login</button>
+                  <button class="btn btn-block btn-primary px-4" id="btnLogin" >Login</button>
                 </div>
               </div>
-              <br>
+              <hr>
               <div class="row">
                 <div class="col-12">
-                  <button type="button" class="btn btn-success" (click)="openModal(template)">Create an Account</button>
+                  <button type="button" class="btn btn-block btn-success" id="btnRegister" (click)="openModal(template)">Create an Account</button>
                 </div>
               </div>
             </form>
@@ -69,6 +69,12 @@
   </div>
 </div>
 <ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Register</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <app-register></app-register>
 </ng-template>
 

@@ -1,10 +1,10 @@
 
-  <div class="modal-header">
+  <!-- <div class="modal-header">
     <h4 class="modal-title pull-left">Register</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
+  </div> -->
   <div class="modal-body">
     <form [formGroup]="registerForm" (ngSubmit)='onRegsit()' >
       <label>Name</label>
@@ -61,6 +61,7 @@
           </div>
         </ng-container>
       </div>
+
         <label>Email</label>
       <div class="input-group mb-3">
         <input
@@ -85,6 +86,7 @@
           </div>
         </ng-container>
       </div>
+
       <label>Password</label>
       <div class="input-group mb-3">
         <input
@@ -96,14 +98,47 @@
         >
         <ng-container *ngIf="isFieldInvalid(registerForm, 'password')">
           <div
+            *ngIf="registerForm.get('password').hasError('minlength')"
+            class="invalid-feedback"
+          >
+            Password must contain at least 8 characters.
+          </div>
+
+          <div
             *ngIf="registerForm.get('password').hasError('required')"
             class="invalid-feedback"
           >
             Password is required.
           </div>
+
         </ng-container>
       </div>
-      <Label>No Card</Label>
+      <label>Re-type Password</label>
+      <div class="input-group mb-3">
+        <input
+          formControlName="confirmPassword"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'confirmPassword')"
+          class="form-control"
+          type="password"
+          required
+        >
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'confirmPassword')">
+          <div
+            *ngIf="registerForm.get('confirmPassword').hasError('required')"
+            class="invalid-feedback"
+          >
+            Re-type Password is required.
+          </div>
+
+          <div
+            *ngIf="registerForm.get('confirmPassword').hasError('confirmedValidator')"
+            class="invalid-feedback"
+          >
+            Re-type Password must be match.
+          </div>
+        </ng-container>
+      </div>
+      <Label>Card Number</Label>
       <div formArrayName="cards">
         <div *ngFor="let cardNumber of noCards().controls; let i=index" [formGroupName]="i">
           <div class="input-group mb-3">
@@ -114,7 +149,7 @@
               type="number"
               formControlName="cardNumber"
               required
-              placeholder="Your number card no.{{i+1}}"
+              placeholder="Your number card no {{i+1}}"
               class="form-control">
               <div *ngIf="noCards().length > 1">
                 <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>

@@ -118,7 +118,7 @@
         <ngx-datatable-column
         [draggable]="false"
         [sortable]="true"
-        name="Subject"
+        name="Title"
         prop="subject"
         >
         <ng-template let-value="value" ngx-datatable-cell-template>
@@ -243,19 +243,68 @@
   <div class="modal-body">
     <form [formGroup]="registerForm" (ngSubmit)='onSubmit()'>
 
-      <label>No Complain</label>
+      <div class="row">
+
+        <div class="col-xl-6">
+          <label>No Complain</label>
+          <div class="input-group mb-3">
+            <input
+              [readOnly]=true
+              formControlName="noComplain"
+              [class.is-invalid]="isFieldInvalid(registerForm, 'noComplain')"
+              class="form-control"
+              type="text"
+              required
+            >
+            <ng-container *ngIf="isFieldInvalid(registerForm, 'noComplain')">
+              <div
+              *ngIf="registerForm.get('noComplain').hasError('required')"
+              class="invalid-feedback"
+            >
+              Response is required.
+            </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <label>Create Date</label>
+          <div class="input-group mb-3">
+            <input
+              [readOnly]=true
+              formControlName="createdDate"
+              [class.is-invalid]="isFieldInvalid(registerForm, 'createdDate')"
+              class="form-control"
+              type="text"
+              required
+            >
+            <ng-container *ngIf="isFieldInvalid(registerForm, 'createdDate')">
+              <div
+              *ngIf="registerForm.get('createdDate').hasError('required')"
+              class="invalid-feedback"
+            >
+              Response is required.
+            </div>
+            </ng-container>
+          </div>
+        </div>
+
+      </div>
+
+
+      <label>Card Number</label>
       <div class="input-group mb-3">
         <input
           [readOnly]=true
-          formControlName="noComplain"
-          [class.is-invalid]="isFieldInvalid(registerForm, 'noComplain')"
+          formControlName="cardNumber"
+          [class.is-invalid]="isFieldInvalid(registerForm, 'cardNumber')"
           class="form-control"
           type="text"
           required
         >
-        <ng-container *ngIf="isFieldInvalid(registerForm, 'noComplain')">
+        <ng-container *ngIf="isFieldInvalid(registerForm, 'cardNumber')">
           <div
-          *ngIf="registerForm.get('noComplain').hasError('required')"
+          *ngIf="registerForm.get('cardNumber').hasError('required')"
           class="invalid-feedback"
         >
           Response is required.
@@ -263,7 +312,7 @@
         </ng-container>
       </div>
 
-      <label>Subject</label>
+      <label>Title</label>
       <div class="input-group mb-3">
         <input
           [readOnly]=true

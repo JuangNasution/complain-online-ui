@@ -15,7 +15,7 @@
 
             <!-- Title -->
             <fieldset class="form-group">
-              <label class="col-form-label required" for="subject">Subject</label>
+              <label class="col-form-label required" for="subject">Title</label>
               <input
                 [class.is-invalid]="isFieldInvalid(form, 'subject')"
                 class="form-control"
@@ -23,7 +23,7 @@
                 id="subject"
                 name="subject"
                 type="text"
-                placeholder="Subject Complain"
+                placeholder="Title Complain"
               />
               <ng-container *ngIf="isFieldInvalid(form,'subject')">
                 <div *ngIf="form.get('subject').hasError('required')" class="invalid-feedback">

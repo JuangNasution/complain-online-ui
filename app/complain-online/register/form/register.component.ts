@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
-import { isFieldInvalid, normalizeFlag } from '../../../util';
+import { ConfirmedValidator, isFieldInvalid, normalizeFlag } from '../../../util';
 import { RegisterService } from '../register.service';
 
 @Component({
@@ -28,8 +28,11 @@ export class RegisterComponent implements OnInit {
       address: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-      password: new FormControl(null, Validators.required),
+      password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      confirmPassword: new FormControl(null, Validators.required),
       cards: this.formBuilder.array([this.newQuantity()])
+    }, {
+      validator: ConfirmedValidator('password', 'confirmPassword')
     });
   }
   onRegsit() {

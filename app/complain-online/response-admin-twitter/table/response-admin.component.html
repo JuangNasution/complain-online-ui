@@ -28,16 +28,19 @@
       <div class="card">
         <div class="row">
           <div class="col-2">
-            <img src={{twit.image}} class="card-img-top rounded-circle pull-left" style="margin: auto;" alt={{twit.user}}>
+            <span class="helper"></span>
+            <img src={{twit.image}} class="card-img-top rounded-circle center" alt={{twit.user}}>
           </div>
           <div class="col-10">
             <div class="card-body">
+              <h5 *ngIf="twit.noComplain">{{twit.noComplain}}</h5>
               <h5 class="card-title">{{twit.user}}</h5>
               <p style="-webkit-line-clamp: 2;" class="">{{twit.text}}</p>
               <p class="pull-left">{{twit.createdAt | date:'medium'}}</p>
             </div>
           </div>
         </div>
+        <hr>
         <div *ngIf="!twit.isProcessed" class="col-auto ml-auto mb-1" >
           <button
           class="btn btn-sm btn-danger"
@@ -54,14 +57,16 @@
           </button>&nbsp;
         </div>
 
-        <div *ngIf="twit.isProcessed" class="col-auto ml-auto mb-1" >
-          <button
-          disabled
-          class="btn btn-sm btn-success"
-          >
-            <i class="fa fa-check-circle-o fa-2x" style="font-size: small;"> Processed</i>
-          </button>&nbsp;
+        <div *ngIf="twit.isProcessed && twit.noComplain" class="col-auto ml-auto mb-1" >
+          <span class="badge badge-success">Processed</span>
+          &nbsp;
         </div>
+
+        <div *ngIf="twit.isProcessed && !twit.noComplain" class="col-auto ml-auto mb-1" >
+          <span class="badge badge-danger">Drop</span>
+          &nbsp;
+        </div>
+
       </div>
     </div>
   </div>

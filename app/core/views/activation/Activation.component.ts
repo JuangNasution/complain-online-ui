@@ -44,13 +44,11 @@ export class ActivationComponent implements OnInit {
           this.body = "Your Account Has Been Activated.";
           this.icon = "fa user-os";
         }else if(data=== 103){
-          this.title = "Wrong Url";
-          this.body = "Your url not valid";
-          this.icon = "fa fa-user-times";
+          // this.router.navigateByUrl('\500');
+          this.on404();
         }else{
-          this.title = "Something Wrong";
-          this.body = "Contact Customer Service";
-          this.icon = "fa  fa-exclamation-circle";
+          this.on500();
+          // this.router.navigateByUrl('\500');
         }
       });
 
@@ -58,7 +56,15 @@ export class ActivationComponent implements OnInit {
 
   }
 
-  onGoHome() {
+  on404() {
+    this.router.navigateByUrl('');
+  }
+
+  on500() {
+    this.router.navigateByUrl('');
+  }
+
+  onLogin() {
     this.router.navigateByUrl('\login');
   }
 
