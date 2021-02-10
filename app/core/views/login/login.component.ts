@@ -58,22 +58,22 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.registerService.activation(normalizeFlag(this.registerForm))
-      .subscribe(
-        res => {
-          if (res == 'Wrong Token') {
-            Swal.fire('Failed!', res.toString(), 'error')
-          } else if (res == 'Your Account Already Activated') {
-            Swal.fire('Failed!', res.toString(), 'error').then(function () {
-              location.reload();
-            });
-          } else {
-            Swal.fire('Congratulations!', res.toString(), 'success').then(function () {
-              location.reload();
-            });
-          }
-        }
-      )
+    // this.registerService.activation(normalizeFlag(this.registerForm))
+    //   .subscribe(
+    //     res => {
+    //       if (res == 'Wrong Token') {
+    //         Swal.fire('Failed!', res.toString(), 'error')
+    //       }else if (res == 'Your Account Already Activated') {
+    //         Swal.fire('Failed!', res.toString() , 'error').then(function () {
+    //           location.reload();
+    //       });
+    //       } else {
+    //         Swal.fire('Congratulations!', res.toString() , 'success').then(function () {
+    //           location.reload();
+    //       });
+    //       }
+    //     }
+    //   )
   }
   onLogin(loginForm: NgForm) {
     this.wrongPassword = false;

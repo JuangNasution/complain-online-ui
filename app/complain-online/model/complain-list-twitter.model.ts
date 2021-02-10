@@ -9,4 +9,5 @@ export interface ComplainTwitterList{
   status: string;
   createdDate: Date;
   responseDate: Date;
+  respondedName: String;
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
-import { DefaultLayoutComponent, P403Component, P404Component, P500Component, } from './views';
+import { DefaultLayoutComponent, P403Component, P404Component, P500Component, ActivationComponent} from './views';
 
 export const routes: Routes = [
   {
@@ -28,6 +28,13 @@ export const routes: Routes = [
     component: P500Component,
     data: {
       title: 'PageModel 500',
+    },
+  },
+  {
+    path: 'activation/:id',
+    component: ActivationComponent,
+    data: {
+      title: 'PageModel Activation',
     },
   },
   {

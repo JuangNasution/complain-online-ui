@@ -42,6 +42,9 @@ export class TwitterTableComponent implements OnInit {
   ) {
     this.registerForm = this.formBuilder.group({
       complainResponse: new FormControl(null, Validators.required),
+      subject: new FormControl(null, Validators.required),
+      complainDetail: new FormControl(null, Validators.required),
+      noComplain: new FormControl(null, Validators.required),
     });
 
   }
@@ -90,6 +93,11 @@ export class TwitterTableComponent implements OnInit {
       })
   }
   openModal(data: ComplainTwitterList, template: TemplateRef<any>) {
+    this.registerForm.patchValue({
+      "subject":data.subject,
+      "complainDetail":data.complainDetail,
+      "noComplain":data.noComplain,
+    })
     this.modalRef = this.modalService.show(template);
     this.dataDetail = data;
   }

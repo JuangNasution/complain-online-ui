@@ -46,7 +46,6 @@ export class ResponseTwitterComponent implements OnInit {
 
   ngOnInit() {
     this.getTwit();
-    // console.table(this.categories)
   }
   modalSubmit(twit:ComplainTwitter, template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

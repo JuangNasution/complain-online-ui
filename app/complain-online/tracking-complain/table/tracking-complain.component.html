@@ -137,6 +137,20 @@
               </ng-template>
             </ngx-datatable-column>
 
+            <!-- Date -->
+            <ngx-datatable-column
+              [cellClass]="'d-none d-md-inline'"
+              [draggable]="false"
+              [headerClass]="'d-none d-md-inline'"
+              [sortable]="true"
+              name="Last Updated Date"
+              prop="lastUpdatedDate"
+            >
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value | date }}
+              </ng-template>
+            </ngx-datatable-column>
+
             <!-- Status-->
             <ngx-datatable-column
               [cellClass]="'d-none d-md-inline'"
@@ -154,7 +168,7 @@
                   <span class="badge badge-success">Done</span>
                 </ng-template>
                 <ng-template #falseInactive>
-                  <span class="badge badge-danger">on Progress</span>
+                  <span class="badge badge-warning">in Progress</span>
                 </ng-template>
               </ng-template>
             </ngx-datatable-column>

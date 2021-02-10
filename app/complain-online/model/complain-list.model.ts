@@ -10,4 +10,6 @@ export interface ComplainList{
   createdDate: Date;
   doneDate: Date;
   cardNumber: String;
+  respondedName: String;
+  lastUpdatedDate: Date;
 }

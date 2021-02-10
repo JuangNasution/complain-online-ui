@@ -41,6 +41,9 @@ export class ResponseAtmComponent implements OnInit {
   ) {
     this.registerForm = this.formBuilder.group({
       complainResponse: new FormControl(null, Validators.required),
+      subject: new FormControl(null, Validators.required),
+      complainDetail: new FormControl(null, Validators.required),
+      noComplain: new FormControl(null, Validators.required),
     });
 
   }
@@ -66,6 +69,7 @@ export class ResponseAtmComponent implements OnInit {
     }
     this.getMenu();
   }
+
   getDetailData(data: ComplainList, template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.dataDetail = data;
@@ -97,6 +101,11 @@ export class ResponseAtmComponent implements OnInit {
       })
   }
   openModal(data: ComplainList, template: TemplateRef<any>) {
+    this.registerForm.patchValue({
+      "subject":data.subject,
+      "complainDetail":data.complainDetail,
+      "noComplain":data.noComplain,
+    })
     this.modalRef = this.modalService.show(template);
     this.dataDetail = data;
   }
