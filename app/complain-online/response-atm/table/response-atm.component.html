@@ -272,15 +272,15 @@
           <div class="input-group mb-3">
             <input
               [readOnly]=true
-              formControlName="createdDate"
-              [class.is-invalid]="isFieldInvalid(registerForm, 'createdDate')"
+              formControlName="createdDateTemp"
+              [class.is-invalid]="isFieldInvalid(registerForm, 'createdDateTemp')"
               class="form-control"
               type="text"
               required
             >
-            <ng-container *ngIf="isFieldInvalid(registerForm, 'createdDate')">
+            <ng-container *ngIf="isFieldInvalid(registerForm, 'createdDateTemp')">
               <div
-              *ngIf="registerForm.get('createdDate').hasError('required')"
+              *ngIf="registerForm.get('createdDateTemp').hasError('required')"
               class="invalid-feedback"
             >
               Response is required.

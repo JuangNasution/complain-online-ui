@@ -29,6 +29,7 @@ export class ResponseAtmComponent implements OnInit {
   modalRef: BsModalRef;
   dataDetail: ComplainList;
   registerForm: FormGroup;
+  tempForm: FormGroup;
   responseComplain: string;
   href: string = "";
   category: string = "";
@@ -48,7 +49,7 @@ export class ResponseAtmComponent implements OnInit {
       subject: new FormControl(null, Validators.required),
       complainDetail: new FormControl(null, Validators.required),
       noComplain: new FormControl(null, Validators.required),
-      createdDate: new FormControl(null, Validators.required),
+      createdDateTemp: new FormControl(null, Validators.required),
       cardNumber: new FormControl(null, Validators.required),
     });
 
@@ -101,7 +102,8 @@ export class ResponseAtmComponent implements OnInit {
       "complainDetail":data.complainDetail,
       "noComplain":data.noComplain,
       "cardNumber":data.cardNumber,
-      "createdDate": this.pipe.transform(data.createdDate, 'short'),
+      // "createdDate": data.createdDate
+      "createdDateTemp": this.pipe.transform(data.createdDate, 'short'),
     })
   }
 
@@ -120,7 +122,6 @@ export class ResponseAtmComponent implements OnInit {
     if (!this.registerForm.valid) {
       return;
     }
-
     this.responseatmservice.responseComplain(this.dataDetail.noComplain, normalizeFlag(this.registerForm))
     .subscribe(
       res => {

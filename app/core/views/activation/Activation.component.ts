@@ -35,20 +35,17 @@ export class ActivationComponent implements OnInit {
           this.body = "Your account has been activated..";
           this.icon = "fa fa-check";
         } else if (data === 102) {
-          console.log("sukses")
           this.title = "Expired";
           this.body = "";
           this.icon = "fa fa-user-times";
-        }else if(data === 101){
+        }else if(data === 104){
           this.title = "Activated";
-          this.body = "Your Account Has Been Activated.";
+          this.body = "Your Account already Activated.";
           this.icon = "fa user-os";
         }else if(data=== 103){
-          // this.router.navigateByUrl('\500');
           this.on404();
         }else{
           this.on500();
-          // this.router.navigateByUrl('\500');
         }
       });
 

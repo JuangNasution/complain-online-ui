@@ -58,6 +58,18 @@
     <br />
       {{ complainList?.cardNumber }}
   </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Responded By </strong>
+    <br />
+    <ng-template
+    [ngIf]="complainList?.respondedName"
+    [ngIfElse]="falseresponseby"
+  >
+    {{ dataDetail?.doneDate }}
+  </ng-template>
+    <ng-template #falseresponseby>-</ng-template>
+  </div>
 </div>
 
 <div class="row mt-2 mb-2">

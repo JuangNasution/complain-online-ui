@@ -7,17 +7,17 @@ export const environment = {
   production: false,
   // apiUrl: 'http://localhost:8080/ets-api',
 
-  apiUrl: 'http://192.168.231.6:8080/ccms-api',
-  oauthUrl: 'http://192.168.231.6:8080/ccms-api',
-  adminUrl: 'http://192.168.231.6:8080/ccms-api',
-  appUrl: 'http://192.168.231.6:8080/ccms-api',
-  userUrl: 'http://192.168.231.6:8080/ccms-api',
+  // apiUrl: 'http://192.168.231.6:8080/ccms-api',
+  // oauthUrl: 'http://192.168.231.6:8080/ccms-api',
+  // adminUrl: 'http://192.168.231.6:8080/ccms-api',
+  // appUrl: 'http://192.168.231.6:8080/ccms-api',
+  // userUrl: 'http://192.168.231.6:8080/ccms-api',
 
-  // apiUrl: 'http://localhost:7070/ets-api',
-  // oauthUrl: 'http://localhost:7071/ets-api',
-  // adminUrl: 'http://localhost:7073/ets-api',
-  // appUrl: 'http://localhost:7072/ets-api',
-  // userUrl: 'http://localhost:7077/ets-api',
+  apiUrl: 'http://localhost:7070/ets-api',
+  oauthUrl: 'http://localhost:7071/ets-api',
+  adminUrl: 'http://localhost:7073/ets-api',
+  appUrl: 'http://localhost:7072/ets-api',
+  userUrl: 'http://localhost:7077/ets-api',
 
 
   // apiUrl: 'http://10.70.10.215:8080/ets-api',

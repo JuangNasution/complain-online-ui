@@ -4,28 +4,29 @@
     <strong> No Complain </strong>
     <br />
       {{ complainList?.noComplain }}
-    <ng-template #falseFirstName>-</ng-template>
   </div>
 
   <div class="col-sm-6 mt-2 pl-0">
     <strong> Subject </strong>
     <br />
       {{ complainList?.subject }}
-    <ng-template #falseLastName>-</ng-template>
   </div>
 
   <div class="col-sm-6 mt-2 pl-0">
     <strong> Category </strong>
     <br />
       {{ complainList?.category }}
-    <ng-template #falseAkaFirstName>-</ng-template>
   </div>
 
   <div class="col-sm-6 mt-2 pl-0">
     <strong> Created Date </strong>
     <br />
       {{ complainList?.createdDate }}
-    <ng-template #falseAkaLastName>-</ng-template>
+  </div>
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Last Updated Date </strong>
+    <br />
+      {{ complainList?.lastUpdatedDate }}
   </div>
 
   <div class="col-sm-6 mt-2 pl-0">
@@ -58,6 +59,19 @@
     <br />
       {{ complainList?.cardNumber }}
   </div>
+
+  <div class="col-sm-6 mt-2 pl-0">
+    <strong> Responded By </strong>
+    <br />
+    <ng-template
+    [ngIf]="complainList?.respondedName"
+    [ngIfElse]="falseresponseby"
+  >
+    {{ dataDetail?.doneDate }}
+  </ng-template>
+    <ng-template #falseresponseby>-</ng-template>
+  </div>
+
 </div>
 
 <div class="row mt-2 mb-2">
