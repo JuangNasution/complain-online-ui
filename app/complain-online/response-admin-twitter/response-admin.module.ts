@@ -6,6 +6,7 @@ import { ComplainSharedModule } from "../shared/complain-shared.module";
 import { TwitterDetailComponent } from './detail/twitter-detail.component';
 import { ResponseAtmRoutingModule } from './response-admin-routing.module';
 import { ResponseTwitterComponent } from './table/response-admin.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ResponseTwitterComponent } from './table/response-admin.component';
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
     SweetAlert2Module.forRoot(),
+    NgxPaginationModule,
     // MatCardModule
   ]
 })

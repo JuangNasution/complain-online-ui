@@ -19,13 +19,13 @@ import { finalize } from 'rxjs/operators';
 export class ResponseTwitterComponent implements OnInit {
 
   // @Input() searchTerm: string;
-  page: PageRequest = new PageRequest();
-  sortTableFn = sortTableFn;
 
   ColumnMode = ColumnMode;
+  page: number = 1;
+  totalRecord: number;
 
-  data: ComplainTwitter;
-  // data: ComplainTwitter[];
+  // data: ComplainTwitter;
+  data: ComplainTwitter[];
   dataDetail: ComplainTwitter;
 
 
@@ -83,40 +83,12 @@ export class ResponseTwitterComponent implements OnInit {
 
   getTwit() {
     this.loadingIndicator = true;
-    // this.data= twitDummy;
+    this.data= twitDummy;
+    // console.log(this.data.length)
 
-    this.twitterComplainService
-      .getTwit()
-      .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe(data => this.data= data);
+    // this.twitterComplainService
+    //   .getTwit()
+    //   .pipe(finalize(() => this.loadingIndicator = false))
+    //   .subscribe(data => this.data= data);
   }
-
-
-  // async onSendTwit(twit:ComplainTwitter ){
-  //   console.log(twit)
-  //   var options = {};
-  //   categories.map(item => {
-  //     options[item.value] = item.name;
-  //   })
-
-  //   const { value: category } = await Swal.fire({
-  //     title: 'Category Complain',
-  //     input: 'select',
-  //     inputOptions:options,
-  //     inputPlaceholder: 'Select a Category',
-  //     showCancelButton: true,
-  //     inputValidator: result => !result && 'You need to select something!',
-  //   })
-
-  //   if (category) {
-  //     this.complainService
-  //     .add({
-  //       cardId:33,
-  //       category: category,
-  //       complainDetail: twit.text,
-  //       subject:"Twitter Complain"
-  //     }).subscribe(() => this.location.back() );
-  //     Swal.fire(`Complain send to <br> PIC ${category}`)
-  //   }
-  // }
 }

@@ -14,3 +14,11 @@ img {
   height: auto;
   vertical-align: middle;
 }
+
+hr {
+  margin-bottom: 5px;
+}
+
+.footercard {
+  height: 35px;
+}

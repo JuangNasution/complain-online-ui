@@ -31,7 +31,7 @@
           formControlName="noKtp"
           [class.is-invalid]="isFieldInvalid(registerForm, 'noKtp')"
           class="form-control"
-          type="number"
+          type="text"
           required
         >
         <ng-container *ngIf="isFieldInvalid(registerForm, 'noKtp')">
@@ -41,7 +41,22 @@
           >
             NO KTP is required.
           </div>
+
+          <div
+            *ngIf="registerForm.get('noKtp').hasError('minlength')"
+            class="invalid-feedback"
+          >
+            NO KTP must contain at least 16 characters.
+          </div>
+
+          <div
+            *ngIf="registerForm.get('noKtp').hasError('pattern')"
+            class="invalid-feedback"
+          >
+            NO KTP only accepts numbers.
+          </div>
           </ng-container>
+
       </div>
       <label>Alamat</label>
       <div class="input-group mb-3">
@@ -140,26 +155,33 @@
       </div>
       <Label>Card Number</Label>
       <div formArrayName="cards">
-        <div *ngFor="let cardNumber of noCards().controls; let i=index" [formGroupName]="i">
+        <div *ngFor="let cardNumber of noCards.controls; let i=index" [formGroupName]="i">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-credit-card"></i></span>
             </div>
             <input
-              type="number"
+              type="text"
               formControlName="cardNumber"
+              [class.is-invalid]="isFieldInvalid(cardNumber, 'cardNumber')"
               required
               placeholder="Your number card no {{i+1}}"
               class="form-control">
-              <div *ngIf="noCards().length > 1">
+              <div *ngIf="noCards.length > 1">
                 <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
               </div>
-            <ng-container *ngIf="isFieldInvalid(registerForm, 'cards')">
+            <ng-container *ngIf="isFieldInvalid(cardNumber, 'cardNumber')">
               <div
-                *ngIf="registerForm.get('cards').hasError('required')"
-                class="invalid-feedback"
+                *ngIf="cardNumber.get('cardNumber').hasError('required')"
+                class="invalid-feedback d-block"
               >
                 Card is required.
+              </div>
+              <div
+                *ngIf="cardNumber.get('cardNumber').hasError('pattern')"
+                class="invalid-feedback"
+              >
+                Card Number only accepts numbers.
               </div>
             </ng-container>
           </div>

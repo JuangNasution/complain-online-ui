@@ -23,6 +23,7 @@ export class ComplainDetailComponent implements OnInit {
         .get(this.dataDetail.noComplain)
         .subscribe(data => {
           this.complainList = data;
+          console.table(this.complainList)
         });
     }
   }

@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   ) {
     this.registerForm = this.formBuilder.group({
       name: new FormControl(null, Validators.required),
-      noKtp: new FormControl(null, Validators.required),
+      noKtp: new FormControl(null, [Validators.required,Validators.pattern("^[0-9]*$")]),
       address: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
@@ -62,21 +62,28 @@ export class RegisterComponent implements OnInit {
     // }
   }
   // ================ Card Config ================ //
-  noCards() : FormArray {
+
+  get f() { return this.registerForm.controls; }
+
+  get noCards() : FormArray {
     return this.registerForm.get("cards") as FormArray
   }
 
   newQuantity(): FormGroup {
     return this.formBuilder.group({
-      cardNumber: ''.toString()
+      cardNumber:  ['', [Validators.required,Validators.pattern("^[0-9]*$")]]
     })
   }
 
+  pointAt(index) {
+    return (<FormArray>this.registerForm.get('cards')).at(index);
+  }
+
   addQuantity() {
-    this.noCards().push(this.newQuantity());
+    this.noCards.push(this.newQuantity());
   }
 
   removeQuantity(i:number) {
-    this.noCards().removeAt(i);
+    this.noCards.removeAt(i);
   }
 }
