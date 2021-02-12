@@ -13,16 +13,20 @@ export class TwitterComplainService extends BaseCrudTableService<ComplainTwitter
     super(http, `${constant.complainOnlineUrl}/complain/twitter`);
   }
 
-  getTwit(): Observable<ComplainTwitter> {
-    return this.http.get<ComplainTwitter>(`${constant.complainOnlineUrl}/complain/twitter`);
+  getTwit(param: HttpParams): Observable<ComplainTwitter> {
+    return this.http.get<ComplainTwitter>(`${constant.complainOnlineUrl}/complain/twitter`,
+    {
+      params: param
+    });
   }
+
   dropTwt(id: string) {
     return this.http.put(
       `${constant.complainOnlineUrl}/complain/drop-twitter/${id}`,"");
   }
 
   getTwitPage(param: HttpParams): Observable<ComplainTwitter>{
-    console.log(param)
+    // console.log(param)
     return this.http.get<ComplainTwitter>(`${constant.complainOnlineUrl}/complain/twitter`,
     {
       params: param

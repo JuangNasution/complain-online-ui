@@ -24,7 +24,7 @@ export class ResponseTwitterComponent implements OnInit {
   totalRecord: number;
 
   // data: [];
-  data : ComplainTwitter[];
+  data : any;
   dataDetail : ComplainTwitter;
 
 
@@ -94,7 +94,11 @@ export class ResponseTwitterComponent implements OnInit {
     this.twitterComplainService
       .getTwitPage(param)
       .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe(data => this.data.push(data));
+      .subscribe((data: any) => {
+        data.forEach(el => {
+          this.data.push(el)
+        })
+      });
   }
 
   getTwit() {
@@ -102,9 +106,15 @@ export class ResponseTwitterComponent implements OnInit {
 
     // this.data = twitDummy;
 
+    let param: HttpParams = new HttpParams();
+    param = param.append('count', `${this.itemPage}`);
+    param = param.append('page', `1`);
+
     this.twitterComplainService
-      .getTwit()
+      .getTwit(param)
       .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe(data => this.data = data);
+      .subscribe((data: ComplainTwitter) => {
+        this.data = data
+      } );
   }
 }
