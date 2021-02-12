@@ -1,14 +1,11 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import Swal from 'sweetalert2';
-import { PageRequest } from '../../../lib/model';
-import { isFieldInvalid, sortTableFn } from '../../../util';
-import { categories } from '../../create-complain/create-category.model';
 import { ComplainTwitter, twitDummy } from '../../model';
 import { ComplainService, TwitterComplainService } from '../../service';
+import { HttpParams } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -22,6 +19,8 @@ export class ResponseTwitterComponent implements OnInit {
 
   ColumnMode = ColumnMode;
   page: number = 1;
+  itemPage: number = 10;
+  itemTotal: number;
   totalRecord: number;
 
   // data: ComplainTwitter;
@@ -47,6 +46,7 @@ export class ResponseTwitterComponent implements OnInit {
   ngOnInit() {
     this.getTwit();
   }
+
   modalSubmit(twit:ComplainTwitter, template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.dataDetail = twit;
@@ -55,6 +55,7 @@ export class ResponseTwitterComponent implements OnInit {
   onSendTwit(){
 
   }
+
   dropTwt(id:string) {
 
     Swal.fire({
@@ -81,14 +82,28 @@ export class ResponseTwitterComponent implements OnInit {
 
   }
 
+  onChangePage(event) {
+    console.log(event);
+
+    let param: HttpParams = new HttpParams();
+    param = param.append('count', `${this.itemPage}`,);
+    param = param.append('page', `${event}`,);
+
+    this.twitterComplainService
+      .getTwitPage(param)
+      .pipe(finalize(() => this.loadingIndicator = false))
+      .subscribe(data => this.data= data);
+  }
+
   getTwit() {
     this.loadingIndicator = true;
     this.data= twitDummy;
-    // console.log(this.data.length)
+    console.log(this.data.length)
+    this.itemTotal = this.data.length+1;
 
-    // this.twitterComplainService
-    //   .getTwit()
-    //   .pipe(finalize(() => this.loadingIndicator = false))
-    //   .subscribe(data => this.data= data);
+    this.twitterComplainService
+      .getTwit()
+      .pipe(finalize(() => this.loadingIndicator = false))
+      .subscribe(data => this.data= data);
   }
 }

@@ -24,7 +24,7 @@
 
 <div class="animated fadeIn" *ngIf="data">
   <div class="row card-group">
-    <div class="col-xl-6" *ngFor="let twit of data | paginate: { itemsPerPage: 10, currentPage: page }">
+    <div class="col-xl-6" *ngFor="let twit of data | paginate: { itemsPerPage: itemPage, currentPage: page, totalItems:itemTotal }">
       <div class="card">
         <div class="row">
           <div class="col-2">
@@ -73,9 +73,13 @@
       </div>
     </div>
   </div>
+
   <div class="has-text-centered" style="text-align: center">
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
-</div>
+    <pagination-controls
+      (pageChange)="onChangePage($event)"
+    ></pagination-controls>
+  </div>
+
 </div>
 
 <ng-template #responseTwitter>

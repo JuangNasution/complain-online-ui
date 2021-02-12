@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { constant } from '../../../environments/constant';
@@ -19,5 +19,12 @@ export class TwitterComplainService extends BaseCrudTableService<ComplainTwitter
   dropTwt(id: string) {
     return this.http.put(
       `${constant.complainOnlineUrl}/complain/drop-twitter/${id}`,"");
+  }
+
+  getTwitPage(param: HttpParams): Observable<ComplainTwitter>{
+    return this.http.get<ComplainTwitter>(`${constant.complainOnlineUrl}/complain/twitter`,
+    {
+      params: param
+    });
   }
 }
