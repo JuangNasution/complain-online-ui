@@ -19,12 +19,12 @@ export class ResponseTwitterComponent implements OnInit {
 
   ColumnMode = ColumnMode;
   page: number = 1;
-  itemPage: number = 10;
+  itemPage: number = 6;
   itemTotal: number;
   totalRecord: number;
 
-  // data: ComplainTwitter;
-  data: ComplainTwitter[];
+  data: ComplainTwitter;
+  // data: ComplainTwitter[];
   dataDetail: ComplainTwitter;
 
 
@@ -91,21 +91,24 @@ export class ResponseTwitterComponent implements OnInit {
 
     console.log(this.page)
 
-    // this.twitterComplainService
-    //   .getTwitPage(param)
-    //   .pipe(finalize(() => this.loadingIndicator = false))
-    //   .subscribe();
+    this.twitterComplainService
+      .getTwitPage(param)
+      .pipe(finalize(() => this.loadingIndicator = false))
+      .subscribe(data => this.data = data);
   }
 
   getTwit() {
-    this.loadingIndicator = true;
-    this.data= twitDummy;
-    console.log(this.data.length)
-    this.itemTotal = this.data.length+1;
+    // this.loadingIndicator = true;
+    // this.data= twitDummy;
+    // console.log(this.data.length)
+    // this.itemTotal = this.data.length+1;
+    let param: HttpParams = new HttpParams();
+    param = param.append('count', `6`);
+    param = param.append('page', `1`);
 
-    // this.twitterComplainService
-    //   .getTwit()
-    //   .pipe(finalize(() => this.loadingIndicator = false))
-    //   .subscribe(data => this.data= data);
+    this.twitterComplainService
+      .getTwit(param)
+      .pipe(finalize(() => this.loadingIndicator = false))
+      .subscribe(data => this.data= data);
   }
 }
