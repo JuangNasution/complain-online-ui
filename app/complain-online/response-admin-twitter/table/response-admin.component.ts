@@ -89,10 +89,12 @@ export class ResponseTwitterComponent implements OnInit {
     param = param.append('count', `${this.itemPage}`,);
     param = param.append('page', `${event}`,);
 
+    // console.log(param)
+
     this.twitterComplainService
       .getTwitPage(param)
       .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe(data => this.data= data);
+      .subscribe();
   }
 
   getTwit() {
@@ -101,9 +103,9 @@ export class ResponseTwitterComponent implements OnInit {
     console.log(this.data.length)
     this.itemTotal = this.data.length+1;
 
-    this.twitterComplainService
-      .getTwit()
-      .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe(data => this.data= data);
+    // this.twitterComplainService
+    //   .getTwit()
+    //   .pipe(finalize(() => this.loadingIndicator = false))
+    //   .subscribe(data => this.data= data);
   }
 }
