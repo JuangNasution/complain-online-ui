@@ -82,19 +82,19 @@ export class ResponseTwitterComponent implements OnInit {
 
   }
 
-  onChangePage(event) {
-    console.log(event);
+  loadMore() {
 
+    this.page = this.page +1
     let param: HttpParams = new HttpParams();
-    param = param.append('count', `${this.itemPage}`,);
-    param = param.append('page', `${event}`,);
+    param = param.append('count', `${this.itemPage}`);
+    param = param.append('page', `${this.page}`);
 
-    // console.log(param)
+    console.log(this.page)
 
-    this.twitterComplainService
-      .getTwitPage(param)
-      .pipe(finalize(() => this.loadingIndicator = false))
-      .subscribe();
+    // this.twitterComplainService
+    //   .getTwitPage(param)
+    //   .pipe(finalize(() => this.loadingIndicator = false))
+    //   .subscribe();
   }
 
   getTwit() {

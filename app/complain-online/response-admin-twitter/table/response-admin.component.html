@@ -24,7 +24,7 @@
 
 <div class="animated fadeIn" *ngIf="data">
   <div class="row card-group">
-    <div class="col-xl-6" *ngFor="let twit of data | paginate: { itemsPerPage: itemPage, currentPage: page, totalItems:itemTotal }">
+    <div class="col-xl-6" *ngFor="let twit of data">
       <div class="card">
         <div class="row">
           <div class="col-2">
@@ -74,11 +74,13 @@
     </div>
   </div>
 
-  <div class="has-text-centered" style="text-align: center">
-    <pagination-controls
-      (pageChange)="onChangePage($event)"
-    ></pagination-controls>
-  </div>
+  <button
+  type="button"
+  class="block"
+  (click)="loadMore()"
+  >
+    Load More
+  </button>
 
 </div>
 
