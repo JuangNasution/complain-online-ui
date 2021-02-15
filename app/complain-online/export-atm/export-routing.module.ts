@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: ExportTableComponent,
     data: {
-      title: 'Tracking',
+      title: 'Export',
       editable: true
     }
   }

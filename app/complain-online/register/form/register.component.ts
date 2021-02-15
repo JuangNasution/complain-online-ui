@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectionStrategy  } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -9,6 +9,7 @@ import { RegisterService } from '../register.service';
 @Component({
   selector: 'app-register',
   templateUrl: 'register.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // styleUrls: ['re.component.scss'],
 })
 
@@ -71,7 +72,7 @@ export class RegisterComponent implements OnInit {
 
   newQuantity(): FormGroup {
     return this.formBuilder.group({
-      cardNumber:  ['', [Validators.required,Validators.pattern("^[0-9]*$")]]
+      cardNumber:  ['', [Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(16)]]
     })
   }
 

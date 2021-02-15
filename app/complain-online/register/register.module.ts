@@ -4,13 +4,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
 import { RegisterComponent } from './form/register.component';
 import { RegisterRoutingModule } from './register-routing.module';
+import { NgxMaskModule } from 'ngx-mask';
+
+
 
 @NgModule({
-  // imports: [
-  //   CommonModule,
-  //   ModalModule.forRoot(),
-  //   ReactiveFormsModule
-  // ],
-  // declarations: [RegisterComponent],
+
+  imports: [
+    CommonModule,
+    ModalModule.forRoot(),
+    ReactiveFormsModule,
+    NgxMaskModule.forChild(),
+
+  ],
+  declarations: [RegisterComponent],
+
 })
 export class RegisterModule {}

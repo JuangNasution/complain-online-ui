@@ -161,13 +161,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-credit-card"></i></span>
             </div>
-            <input
-              type="text"
+            <input type='text' mask="0000-0000-0000-0000"
+              maxlength="16"
               formControlName="cardNumber"
               [class.is-invalid]="isFieldInvalid(cardNumber, 'cardNumber')"
               required
               placeholder="Your number card no {{i+1}}"
-              class="form-control">
+              class="form-control"
+            >
               <div *ngIf="noCards.length > 1">
                 <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
               </div>
@@ -178,6 +179,14 @@
               >
                 Card is required.
               </div>
+
+              <div
+                *ngIf="cardNumber.get('cardNumber').hasError('minlength')"
+                class="invalid-feedback"
+              >
+                Card Number must contain at least 16 characters.
+              </div>
+
               <div
                 *ngIf="cardNumber.get('cardNumber').hasError('pattern')"
                 class="invalid-feedback"
