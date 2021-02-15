@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   ) {
     this.registerForm = this.formBuilder.group({
       name: new FormControl(null, Validators.required),
-      noKtp: new FormControl(null, [Validators.required,Validators.pattern("^[0-9]*$")]),
+      noKtp: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(16), Validators.maxLength(16)]),
       address: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),

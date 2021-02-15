@@ -82,11 +82,12 @@
   >
     Load More
   </button>
-
- <h4 class="modal-title pull-left">Categorize Tweet</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+  <ng-template #responseTwitter>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Categorize Tweet</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
-    </button>
+      </button>
   </div>
   <div class="modal-body">
     <twitter-detail [dataDetail]="dataDetail"></twitter-detail>

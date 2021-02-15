@@ -17,6 +17,7 @@ export class ComplainDetailComponent implements OnInit {
   constructor(private complainService: ComplainService) { }
 
   ngOnInit() {
+    console.log(this.dataDetail.status);
     if (this.dataDetail.noComplain) {
       // console.table(this.id);
       this.complainService
