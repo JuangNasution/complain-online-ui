@@ -28,6 +28,7 @@
       <label>No KTP</label>
       <div class="input-group mb-3">
         <input
+          mask="0000000000000000"
           formControlName="noKtp"
           [class.is-invalid]="isFieldInvalid(registerForm, 'noKtp')"
           class="form-control"
@@ -161,8 +162,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="icon-credit-card"></i></span>
             </div>
-            <input type='text' mask="0000-0000-0000-0000"
-              maxlength="16"
+            <input type='text'
+              mask="0000-0000-0000-0000"
+              dropSpecialCharacters="false"
+              [showMaskTyped] = "false"
+              maxlength="19"
               formControlName="cardNumber"
               [class.is-invalid]="isFieldInvalid(cardNumber, 'cardNumber')"
               required

@@ -25,7 +25,12 @@ export class RegisterComponent implements OnInit {
   ) {
     this.registerForm = this.formBuilder.group({
       name: new FormControl(null, Validators.required),
-      noKtp: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(16), Validators.maxLength(16)]),
+      noKtp: new FormControl(null, [
+        Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.minLength(16),
+        Validators.maxLength(16)
+      ]),
       address: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
@@ -41,6 +46,8 @@ export class RegisterComponent implements OnInit {
     if (!this.registerForm.valid) {
       return;
     }
+
+    console.log(this.registerForm.value)
 
     this.registerService.addData(normalizeFlag(this.registerForm))
       .subscribe(
@@ -72,7 +79,10 @@ export class RegisterComponent implements OnInit {
 
   newQuantity(): FormGroup {
     return this.formBuilder.group({
-      cardNumber:  ['', [Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(16)]]
+      cardNumber:  ['', [
+        Validators.required,
+        // Validators.pattern("^[0-9]*$"),
+        Validators.minLength(16)]]
     })
   }
 

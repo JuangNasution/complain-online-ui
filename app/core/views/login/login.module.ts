@@ -6,13 +6,18 @@ import { LoginRoutingModule } from "./login-routing.module";
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { RegisterComponent } from "../../../complain-online/register/form/register.component";
 
+
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     LoginRoutingModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(options),
   ],
   declarations: [LoginComponent, RegisterComponent]
 })
